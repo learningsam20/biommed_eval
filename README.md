@@ -138,11 +138,12 @@ backend/app/          API, retrieval, generation, metrics
 backend/scripts/      index, eval set, runner, report
 frontend/src/        search UI
 data/eval_queries_100.json
-docs/                architecture, evaluation report, best config
+docs/                requirements, architecture, evaluation report, best config
 ```
 
 | Document | Contents |
 |---|---|
+| [docs/requirement.md](docs/requirement.md) | Product requirements |
 | [docs/architecture.md](docs/architecture.md) | System diagram |
 | [docs/evaluation_report.md](docs/evaluation_report.md) | Comparison table, winner, examples |
 | [docs/best_hybrid_config.json](docs/best_hybrid_config.json) | Selected retrieval recipe |
