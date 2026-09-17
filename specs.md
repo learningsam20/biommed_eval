@@ -223,9 +223,9 @@ Manual review:
 
 ### 6.4 Scripts
 - `python -m scripts.run_evaluation --config all --eval-set data/eval_queries_100.json --output results/`
-  Produces `results/<config>_results.json` (per-query) + `results/summary.json` (aggregates).
+  Writes local per-query JSON under `results/` (gitignored). Same retrieve path as `POST /api/search`.
 - `python -m scripts.generate_report --results-dir results/ --output docs/evaluation_report.md`
-  Produces comparison table, winner + rationale, latency/cost trade-off paragraph, success/failure examples.
+  Writes `docs/evaluation_report.md` (comparison table, winner, examples) and `docs/best_hybrid_config.json`.
 - All scripts: `--help` documented, exit non-zero on error, deterministic given same `.env` + eval set.
 
 ---

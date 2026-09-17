@@ -6,8 +6,8 @@
   "query_expansion": true,
   "weight_bm25": 0.5,
   "weight_dense": 0.5,
-  "why": "Highest nDCG@10 and Recall@10 on the frozen 100-query set among lexical, dense, hybrid RRF, hybrid weighted, and hybrid+expansion.",
-  "tradeoff": "Expansion adds one LLM round-trip (~27s/query locally) versus ~80ms for weighted hybrid without expansion. Interactive UI therefore defaults expansion off; enable it when maximising recall.",
+  "why": "Won the 100-query comparison table: highest nDCG@10 and Recall@10 among lexical, dense, hybrid, and hybrid+expansion.",
+  "tradeoff": "One extra LLM round-trip for expansion (~27s/query locally) versus ~80ms for weighted hybrid without expansion. UI defaults expansion off.",
   "metrics": {
     "recall@5": 0.4245878610553533,
     "recall@10": 0.5176833205064629,
@@ -16,5 +16,5 @@
     "latency_ms": 26930.408963810332,
     "cost_usd_per_query": 0.0
   },
-  "experiment_results": "results/summary.json"
+  "backed_by": "docs/evaluation_report.md comparison table"
 }

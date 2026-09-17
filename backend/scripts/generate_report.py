@@ -95,9 +95,11 @@ def main():
         if cfgs["hybrid_expansion"]["ndcg@10"] > cfgs["best"]["ndcg@10"] + 1e-9:
             best = "hybrid_expansion"
 
-    lines = ["# Evaluation Report — BioMed Hybrid Search", "",
+    lines = ["# Evaluation report", "",
              f"Judge: `{summary.get('judge_model')}` temp={summary.get('judge_temperature')} | "
              f"Embeddings: `{summary.get('embedding_model')}` | VectorDB: `{summary.get('vector_db')}`", "",
+             "## Traditional retrieval metrics", "",
+             "Measured with `relevant_passage_ids`. Latency is retrieval wall time. Cost is LLM token cost.", "",
              "## Comparison table", "",
              "| config | recall@5 | recall@10 | mrr@10 | ndcg@10 | latency_ms | p95 | cost_usd/q |",
              "|---|---|---|---|---|---|---|---|"]
@@ -114,7 +116,9 @@ def main():
     if judged:
         n_j = next(iter(judged.values())).get("n_judged", "?")
         jmodel = summary.get("judge_subset", {}).get("judge_model", summary.get("judge_model"))
-        lines += ["", f"## LLM-judge ({n_j}-query subset, `{jmodel}`, temp=0.0)", "",
+        lines += ["", "## LLM-judge evaluation", "",
+                  f"Equivalent framework (`judge.py`): correctness, groundedness, context relevance. "
+                  f"Prompt/model/temperature fixed. Subset size `{n_j}`, model `{jmodel}`, temp=0.0.", "",
                   "| config | correctness | groundedness | context_rel | cites valid | insufficient | n_judged |",
                   "|---|---|---|---|---|---|---|"]
         for c in order:
@@ -139,7 +143,9 @@ def main():
               "hosted providers). For interactive UI we default expansion **off** and use weighted "
               "fusion (~80 ms retrieval); enable expansion when maximising recall offline.",
               "Code alias: `best` = weighted fusion + query expansion (same recipe as "
-              "`hybrid_expansion` after this fix).",
+              "`hybrid_expansion`).",
+              "", "## Manual review", "",
+              "Cases where the judge and retrieval metrics disagree. Citation validity is checked in code.",
               "", "## Success cases", ""]
     for s in SUCCESS_CASES:
         lines.append(
@@ -158,7 +164,37 @@ def main():
     _out = resolve_path(args.output)
     _out.parent.mkdir(parents=True, exist_ok=True)
     _out.write_text("\n".join(lines))
-    print(f"report -> {resolve_path(args.output)} (winner: {best})")
+
+    recipe = {
+        "name": best,
+        "alias": "best",
+        "retrieval": "hybrid" if "hybrid" in str(best) else best,
+        "fusion": "weighted" if best in ("hybrid_weighted", "hybrid_expansion", "best") else "rrf",
+        "query_expansion": best in ("hybrid_expansion", "best"),
+        "weight_bm25": 0.5,
+        "weight_dense": 0.5,
+        "why": (
+            "Won the 100-query comparison table: highest nDCG@10 and Recall@10 among "
+            "lexical, dense, hybrid, and hybrid+expansion."
+        ),
+        "tradeoff": (
+            "One extra LLM round-trip for expansion versus ~80ms for weighted hybrid "
+            "without expansion. UI defaults expansion off."
+        ),
+        "metrics": {
+            "recall@5": b.get("recall@5"),
+            "recall@10": b.get("recall@10"),
+            "mrr@10": b.get("mrr@10"),
+            "ndcg@10": b.get("ndcg@10"),
+            "latency_ms": b.get("latency_ms"),
+            "cost_usd_per_query": b.get("cost_usd_per_query", 0.0),
+        },
+        "backed_by": "docs/evaluation_report.md comparison table",
+    }
+    recipe_path = resolve_path("docs/best_hybrid_config.json")
+    recipe_path.write_text(json.dumps(recipe, indent=2) + "\n")
+    print(f"report -> {_out} (winner: {best})")
+    print(f"best config -> {recipe_path}")
 
 
 if __name__ == "__main__":

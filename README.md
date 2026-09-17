@@ -39,52 +39,48 @@ Set `HF_TOKEN` in `.env` if the Hub requires auth.
 
 ```mermaid
 flowchart TB
-    subgraph OFFLINE["Offline"]
-        HF["HF rag-mini-bioasq"] --> NORM["Normalise + cache"]
-        NORM --> BM25B["BM25 index"]
-        NORM --> ENC["Embed passages"]
-        ENC --> PIN["Pinecone or Qdrant"]
+    subgraph OFFLINE["Offline data path"]
+        HF["Load dataset"] --> PREP["Prepare passages"]
+        PREP --> BM25B["BM25 index"]
+        PREP --> ENC["Embed + vector index"]
     end
-    subgraph ONLINE["Online"]
-        UQ["Query"] --> EXP["Optional LLM expansion"]
-        EXP --> LX["BM25"]
-        EXP --> DN["Dense search"]
+    subgraph ONLINE["Online query path"]
+        UQ["Query"] --> EXP["Query expansion"]
+        EXP --> LX["Lexical"]
+        EXP --> DN["Dense"]
         BM25B --> LX
-        PIN --> DN
-        LX --> FUS["Weighted or RRF fusion"]
+        ENC --> DN
+        LX --> FUS["Hybrid fusion"]
         DN --> FUS
-        FUS --> CTX["Top-K context"]
-        CTX --> GEN["Grounded LLM answer"]
-        GEN --> VAL["Citation check"]
+        FUS --> CTX["Selected context"]
+        CTX --> GEN["Final LLM call"]
     end
-    subgraph UI["UI"]
-        SI["Search"] --> EV["Evidence"]
-        EV --> AP["Cited answer or insufficient"]
+    subgraph UI["User-facing path"]
+        IN["Question input"] --> EV["Evidence: IDs, scores, links"]
+        EV --> FAN["Answer + citations or insufficient"]
     end
-    subgraph EVAL["Eval"]
-        CS["100 frozen queries"] --> LOOP["Same retrieve path"]
-        FUS -.-> LOOP
-        LOOP --> LOG["Log IDs, scores, latency"]
-        LOG --> REP["Metrics + report"]
+    subgraph EXP2["Experiment path"]
+        SET["Same 100 query IDs"] --> RUN["Same retrieve pipeline"]
+        FUS -.-> RUN
+        RUN --> LOG["Log config, IDs, scores"]
+        LOG --> TABLE["Comparison table → best hybrid config"]
     end
     ONLINE --> UI
 ```
 
-Indexes are built once, then shared by the UI and the 100-query runner. Notes and the full diagram: **[docs/architecture.md](docs/architecture.md)**.
+Full diagram: **[docs/architecture.md](docs/architecture.md)**.
 
-### Configurable stack
+### Main choices
 
-Providers, models, and fusion are **`.env` switches**, not code forks. Retrieval, the UI, and eval all read the same settings.
+| Choice | Decision |
+|---|---|
+| Vector database | Pinecone serverless (default) or Qdrant via `VECTOR_DB` |
+| Embedding model | `BAAI/bge-base-en-v1.5` (768-d), set in `.env` |
+| Fusion | Weighted (default; higher nDCG here) and RRF |
+| Final-answer model | OpenRouter or Ollama (`LLM_PROVIDER`) |
+| Citation validation | [`backend/app/generation/answer.py`](backend/app/generation/answer.py) — cited IDs must be retrieved IDs |
 
-| Knob | How to switch | Default | Why this default |
-|---|---|---|---|
-| Vector store | `VECTOR_DB=pinecone` or `qdrant` | Pinecone serverless | Managed index, free-tier friendly, no local disk for 40k vectors. Qdrant is the offline/dev path. |
-| Embeddings | `EMBEDDING_MODEL` + matching `EMBEDDING_DIM` | `BAAI/bge-base-en-v1.5` (768-d) | Strong general English retrieval at a size that indexes quickly. Swap MiniLM (384) or bge-large (1024) and re-run `make index`. |
-| LLM | `LLM_PROVIDER=openrouter` or `ollama` | OpenRouter (cloud) | One OpenAI-compatible client for expansion, answers, and the judge. Ollama for local/zero-cost runs (`OLLAMA_MODEL`). |
-| Fusion | UI control, or `FUSION_METHOD` | Weighted | Beat RRF on this corpus (nDCG 0.607 vs 0.583). RRF stays as a rank-robust option. |
-| Expansion | UI toggle; `QUERY_EXPANSION_ENABLED` | Off in the UI | Highest recall when on; ~27 s/query locally. Interactive search stays ~80 ms without it. |
-
-Citation checks stay in code regardless of provider: [`backend/app/generation/answer.py`](backend/app/generation/answer.py).
+These are `.env` switches, not code forks. Changing the embedder requires `make index`.
 
 ---
 
@@ -111,8 +107,7 @@ Then open **http://localhost:5269** (API **http://localhost:5268**). Defaults: `
 ```bash
 make eval-setup               # freeze 100 queries (already in the repo)
 make eval-run                 # lexical, dense, hybrid, expansion
-make eval-report              # docs/evaluation_report.md
-make output                   # snapshot artifacts into output/
+make eval-report              # docs/evaluation_report.md + docs/best_hybrid_config.json
 make test
 ```
 
@@ -132,7 +127,7 @@ Same 100 query IDs for every config.
 
 Expansion is the best **ranker**. The LLM judge (20 queries) preferred **weighted hybrid** for correctness (0.75 vs 0.58) and groundedness (0.80 vs 0.51). Extra recall costs one LLM round-trip. Local Ollama is $0; hosted models accrue `cost_usd`.
 
-Full table, judge scores, and examples: **[docs/evaluation_report.md](docs/evaluation_report.md)**. Chosen recipe: **[output/best_hybrid_config.json](output/best_hybrid_config.json)**.
+Full table, judge scores, and examples: **[docs/evaluation_report.md](docs/evaluation_report.md)**. Chosen recipe: **[docs/best_hybrid_config.json](docs/best_hybrid_config.json)**. Runner: **[backend/scripts/run_evaluation.py](backend/scripts/run_evaluation.py)**.
 
 ---
 
@@ -143,14 +138,14 @@ backend/app/          API, retrieval, generation, metrics
 backend/scripts/      index, eval set, runner, report
 frontend/src/        search UI
 data/eval_queries_100.json
-docs/                architecture, evaluation report
-output/              frozen eval snapshots
+docs/                architecture, evaluation report, best config
 ```
 
 | Document | Contents |
 |---|---|
-| [docs/architecture.md](docs/architecture.md) | Detailed system diagram |
-| [docs/evaluation_report.md](docs/evaluation_report.md) | Metrics, examples, trade-offs |
-| [output/](output/) | Eval set, runner, per-config results |
+| [docs/architecture.md](docs/architecture.md) | System diagram |
+| [docs/evaluation_report.md](docs/evaluation_report.md) | Comparison table, winner, examples |
+| [docs/best_hybrid_config.json](docs/best_hybrid_config.json) | Selected retrieval recipe |
+| [backend/scripts/run_evaluation.py](backend/scripts/run_evaluation.py) | Reproducible 100-query runner |
 | [specs.md](specs.md) | Interfaces and implementation notes |
 | [summary.md](summary.md) | Design decisions |

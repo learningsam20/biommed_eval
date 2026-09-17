@@ -14,7 +14,7 @@ backend/.pytest_cache/
 data/*.jsonl
 data/*.pkl
 
-# eval working copies (snapshots live in output/results/)
+# local eval runs (report + best config live in docs/)
 /results/
 /results_judge20/
 

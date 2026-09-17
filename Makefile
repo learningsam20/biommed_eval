@@ -1,5 +1,5 @@
 # Makefile — BioMed Hybrid Search (Pinecone-first)
-.PHONY: help install backend-install frontend-install dev backend-dev frontend-dev restart build test eval-setup eval-run eval-report output index clean
+.PHONY: help install backend-install frontend-install dev backend-dev frontend-dev restart build test eval-setup eval-run eval-report index clean
 
 help:
 	@echo "Setup:"; echo "  make install          - backend + frontend deps"
@@ -8,8 +8,7 @@ help:
 	@echo "  make restart          - kill those ports and start both (scripts/restart.sh)"
 	@echo "Indexing:"; echo "  make index            - build BM25 + Pinecone index"
 	@echo "Evaluation:"; echo "  make eval-setup       - frozen 100-query set"
-	@echo "  make eval-run         - run all configs"; echo "  make eval-report      - markdown report"
-	@echo "  make output           - snapshot eval artifacts into output/"
+	@echo "  make eval-run         - run all configs"; echo "  make eval-report      - markdown report + best config"
 	@echo "Maintenance:"; echo "  make test | make clean"
 
 install: backend-install frontend-install
@@ -44,9 +43,6 @@ eval-run:
 
 eval-report:
 	cd backend && python -m scripts.generate_report --results-dir results --output docs/evaluation_report.md
-
-output:
-	cd backend && python -m scripts.assemble_output
 
 test:
 	cd backend && python -m pytest tests/ -v

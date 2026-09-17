@@ -18,6 +18,6 @@ Providers are `.env` switches. Implementation: [specs.md](specs.md). Diagram: [d
 
 ## Result
 
-Hybrid + expansion wins nDCG@10 (0.632) and Recall@10 (0.518). Weighted hybrid is better on judge correctness and ~80 ms. UI default: weighted, expansion off.
+Hybrid + expansion wins nDCG@10 (0.632) and Recall@10 (0.518) on 100 queries — that is the selected recipe. The 20-query LLM-judge prefers weighted hybrid for correctness; it is a trade-off, not the selector. UI default: weighted, expansion off.
 
-Details: [docs/evaluation_report.md](docs/evaluation_report.md).
+Details: [docs/evaluation_report.md](docs/evaluation_report.md). Recipe: [docs/best_hybrid_config.json](docs/best_hybrid_config.json). Runner: [backend/scripts/run_evaluation.py](backend/scripts/run_evaluation.py).
