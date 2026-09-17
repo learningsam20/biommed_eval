@@ -1,0 +1,30 @@
+# secrets
+.env
+
+# python
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+backend/.pytest_cache/
+
+# local indexes / caches (rebuild with make index)
+data/*.jsonl
+data/*.pkl
+
+# eval working copies (snapshots live in output/results/)
+/results/
+/results_judge20/
+
+# frontend
+frontend/node_modules/
+frontend/dist/
+
+# runtime
+/logs/
+*.log
+.DS_Store
+.idea/
+.vscode/

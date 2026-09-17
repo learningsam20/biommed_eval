@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply antialiased;
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-[#f6f8f9] text-ink font-sans;
+  }
+  ::selection {
+    @apply bg-clinical-200 text-clinical-900;
+  }
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5d9 transparent;
+  }
+  *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  *::-webkit-scrollbar-thumb {
+    background: #cbd5d9;
+    border-radius: 999px;
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
+
+@layer components {
+  .search-bar {
+    @apply w-full rounded-xl2 border border-slate-200 bg-white px-5 py-4 pl-12 text-lg text-ink shadow-card outline-none transition-all duration-200 placeholder:text-slate-400 focus:border-clinical-400 focus:bg-white focus:shadow-lift focus:ring-4 focus:ring-clinical-100;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-clinical-600 px-5 py-3 font-semibold text-white shadow-card transition-all duration-200 hover:bg-clinical-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-medium;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -450px 0;
+  }
+  100% {
+    background-position: 450px 0;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.35s ease-out both;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.skeleton-line {
+  @apply rounded bg-slate-200;
+  background-image: linear-gradient(90deg, #e8ecee 0px, #f4f6f7 40px, #e8ecee 80px);
+  background-size: 900px 100%;
+  animation: shimmer 1.6s linear infinite;
+}

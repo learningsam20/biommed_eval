@@ -1,0 +1,21 @@
+# Pinecone is cloud-hosted: no vector-DB container needed by default.
+# Uncomment qdrant service only when VECTOR_DB=qdrant for local dev.
+services:
+  backend:
+    build: ./backend
+    container_name: biomed_backend
+    ports: ["5268:8000"]
+    env_file: [.env]
+    volumes: ["./backend:/app", "./data:/app/data"]
+  frontend:
+    build: ./frontend
+    container_name: biomed_frontend
+    ports: ["5269:80"]
+    environment: ["VITE_API_URL=http://localhost:5268"]
+    depends_on: [backend]
+  # qdrant:
+  #   image: qdrant/qdrant:v1.11.0
+  #   ports: ["6333:6333"]
+  #   volumes: ["qdrant_data:/qdrant/storage"]
+# volumes:
+#   qdrant_data:

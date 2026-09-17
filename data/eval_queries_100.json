@@ -1,0 +1,1670 @@
+[
+  {
+    "query_id": 2218,
+    "question": "How many times is CLAST faster than BLAST?",
+    "answer": "was capable of identifying sequence similarities ~80.8 times faster than blast and 9.6 times faster than blat . ",
+    "relevant_passage_ids": [
+      25495907
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 4035,
+    "question": "Which receptor is blocked by Finerenone?",
+    "answer": "Finerenone is a nonsteroidal mineralocorticoid receptor antagonist.",
+    "relevant_passage_ids": [
+      31655812,
+      33107592,
+      32088716,
+      32910349,
+      28926607,
+      25678098,
+      29779093,
+      33179798,
+      30171161,
+      32890415,
+      26095025,
+      26325557,
+      26203193,
+      28025025,
+      30356804,
+      29437893,
+      31665733,
+      28577743,
+      24621652,
+      26634965,
+      28320854,
+      32945624,
+      33099609,
+      31283930,
+      26902493,
+      29668577,
+      27431783,
+      30825073,
+      32729974,
+      31583611
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 85,
+    "question": "Which transcription factor is considered as a master regulator of lysosomal genes?",
+    "answer": "Transcription factor EB (TFEB) is a master regulator of lysosomal biogenesis and autophagy, driving lysosome adaptation to environmental cues, such as starvation, and therefore targeting of TFEB may provide a novel therapeutic strategy for modulating lysosomal function in human disease.",
+    "relevant_passage_ids": [
+      23604321,
+      23393155,
+      23609508,
+      25315655,
+      22343943,
+      23830905,
+      23524842,
+      23401004,
+      21617040,
+      21804531,
+      25605940,
+      25060788,
+      23457305,
+      21752829,
+      25750174
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 318,
+    "question": "Describe the mechanism of action of drisapersen",
+    "answer": "Drisapersen is a 2'-O-methyl-phosphorothioate oligonucleotide designed to skip exon 51 in dystrophin pre-mRNA to restore the reading frame of the mRNA. It has potential for treatment of Duchenne muscular dystrophy.",
+    "relevant_passage_ids": [
+      24292388,
+      24620745,
+      25209738,
+      24229740,
+      23995279,
+      24321374
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 2539,
+    "question": "What is the aim of the 4D nucleome project?",
+    "answer": "The 4D Nucleome Network aims to develop and apply approaches to map the structure and dynamics of the human and mouse genomes in space and time with the goal of gaining deeper mechanistic insights into how the nucleus is organized and functions. The project will develop and benchmark experimental and computational approaches for measuring genome conformation and nuclear organization, and investigate how these contribute to gene regulation and other genome functions.",
+    "relevant_passage_ids": [
+      28905911
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 4373,
+    "question": "What is caused by loss-of-function variants in BCAS3?",
+    "answer": "Bi-allelic loss-of-function variants in BCAS3 cause a syndromic neurodevelopmental disorder. BCAS3 microtubule-associated cell migration factor (BCAS3) is a large, highly conserved cytoskeletal protein previously proposed to be critical in angiogenesis and implicated in human embryogenesis and tumorigenesis.",
+    "relevant_passage_ids": [
+      34022130
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 260,
+    "question": "Describe the mechanism of action of the LINX system for treatment of gastroesophageal reflux disease.",
+    "answer": "LINX Reflux Management System is a sphincter augmentation device designed to prevent gastroesophageal reflux due to abnormal opening of the lower esophageal sphincter (LES) by augmenting the sphincter barrier. It is implanted via laparoscopic procedure that does not alter gastric anatomy and is easily reversible.",
+    "relevant_passage_ids": [
+      24117632,
+      21037442,
+      23237251,
+      25012804,
+      22538694,
+      25000345,
+      23814607,
+      25264655,
+      23155537,
+      25062898,
+      19951799,
+      24778041
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 3593,
+    "question": "What is the cause of the disease Xeroderma Pigmentosum?",
+    "answer": "Mutations in the ERCC1 or ERCC4 genes cause a remarkable array of rare inherited human disorders including specific forms of xeroderma pigmentosum. Individuals with NER-defective xeroderma pigmentosum (XP), in which bulky DNA lesions are not efficiently removed, are cancer-prone and suffer neurodegeneration.",
+    "relevant_passage_ids": [
+      28676261,
+      26074087,
+      29403087,
+      29105242,
+      28974143
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 3495,
+    "question": "What is the function of the Spt6 gene in yeast?",
+    "answer": "Spt6 is a highly conserved histone chaperone that interacts directly with both RNA polymerase II and histones to regulate gene expression. Spt6 is a highly conserved factor required for normal transcription and chromatin structure. Binding of elongation factor Spt6 to Iws1 provides an effective means for coupling eukaryotic mRNA synthesis, chromatin remodelling and mRNA export. Spt6 Is Essential for rRNA Synthesis by RNA Polymerase I. Spt6 (suppressor of Ty6) has many roles in transcription initiation and elongation by RNA polymerase (Pol) II. We identify the histone H3-H4 chaperone Spt6 as the factor that mediates nucleosome reassembly onto the PHO5, PHO8, ADH2, ADY2, and SUC2 promoters during transcriptional repression.",
+    "relevant_passage_ids": [
+      25918242,
+      1330823,
+      16455495,
+      24100010,
+      21098123,
+      29905868,
+      21057455,
+      8844144,
+      9450930
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 325,
+    "question": "How does ranolazine affect calcium handling in the heart",
+    "answer": "Ranolazine has only a small effect on the basal calcium current, while it greatly affects whole cell calcium current when facilitated by beta-adrenoceptor or histamine receptor activation.\nRanolazine is a novel agent that inhibits the late sodium current thereby reducing cellular sodium and calcium overload.\nRanolazine reduces Ca2+ overload and LV mechanical dysfunction during ischemia/reperfusion.\nranolazine decreases  I(Na,L)-induced dysregulation of calcium cycling that contributes to the antiarrhythmic actions of this agent.\nranolazine desensitizes Ca(2+)-dependent RyR2 activation, and inhibits Ca(i) oscillations.\nranolazine ameliorates the Ca(2+) response and cross-bridge kinetics of cardiac myofilaments.",
+    "relevant_passage_ids": [
+      22245792,
+      16781216,
+      19675298,
+      20924097,
+      18439620,
+      21741479,
+      8735623,
+      17027025,
+      23247666,
+      16775092,
+      23271797,
+      17220471,
+      22879384,
+      23596505,
+      22709755,
+      22343711
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 4162,
+    "question": "Are somatic mutations positioned towards the nuclear periphery?",
+    "answer": "lamina-associated regions, which are typically localized at the nuclear periphery, displayed higher somatic mutation frequencies than did the interlamina regions at the nuclear core. Smoking and UV-related signatures, as well as substitutions at certain motifs, were more enriched in the nuclear periphery.",
+    "relevant_passage_ids": [
+      28967881,
+      11243810,
+      15494683
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 2731,
+    "question": "What biologic process in the body is associated with Mast cells?",
+    "answer": "Mast cells (MCs) are innate immune cells that are a major source of costimulatory signals and inflammatory mediators in the intestinal mucosa. ",
+    "relevant_passage_ids": [
+      24382176,
+      17386403,
+      27381924,
+      24342726,
+      27288329,
+      16141514,
+      6178551,
+      24903914,
+      17468237,
+      27619824,
+      28439090,
+      16964309,
+      27302551,
+      9060446,
+      9354811,
+      15480318,
+      11447391
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 3383,
+    "question": "AhR ligands are attractive drug targets for pharmaceutical development due to their induction of Cyp1a1, yes or no?",
+    "answer": "Yes,  there is little evidence to support the indiscriminate exclusion of AhR activators/Cyp1a1 inducers from early drug developmental pipelines.",
+    "relevant_passage_ids": [
+      17327465,
+      28944315
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 1565,
+    "question": "What histone trimethylation has been associated to RNA splicing?",
+    "answer": "Mostly H3K36me3 but there is some evidence that H3K4me3 may also play a role in splicing",
+    "relevant_passage_ids": [
+      19823040,
+      21792193,
+      23740743,
+      22188810,
+      23676078,
+      22308494,
+      18042460,
+      21807997
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 4174,
+    "question": "What percent of Rheumatoid Arthritis (RA) patients are not responding to anti-TNF therapy?",
+    "answer": "These therapies are, however, expensive and 30% of patients fail to respond.",
+    "relevant_passage_ids": [
+      17985409,
+      19211043,
+      17354663,
+      21431944,
+      25733803,
+      19389230,
+      25504080,
+      20444755,
+      16705046,
+      22133052,
+      27974105,
+      18713756
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 1607,
+    "question": "What is the effect of ranolazine in diastolic heart failure?",
+    "answer": "Data from in vitro and animal studies indicate that ranolazine improves diastolic function by inhibiting the late sodium current. Ranolazine is an innovative anti-ischemic and antianginal agent that reduces the Na-dependent Ca-overload, which improves diastolic tone and oxygen handling during myocardial ischemia. Furthermore, ranolazine improves cardiac diastolic dysfunction through modulation of myofilament calcium sensitivity.",
+    "relevant_passage_ids": [
+      20924097,
+      18439620,
+      19752362,
+      19403851,
+      22767404,
+      19333133,
+      23596505,
+      17027025,
+      21538388,
+      24251065,
+      22343711,
+      22465693,
+      7873471
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 3149,
+    "question": "Reslizumab is a humanized monoclonal antibody to treat what specific type of asthma?",
+    "answer": "Reslizumab in the treatment of severe eosinophilic asthma:\u00a0an update.",
+    "relevant_passage_ids": [
+      29059618,
+      28344579,
+      29486600,
+      29554826,
+      27445482,
+      28683596,
+      23326187,
+      30346831,
+      27458609,
+      28421429
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 176,
+    "question": "Which disease is characterized by congenital absence of intrinsic ganglion cells of the gastrointestinal tract?",
+    "answer": "Hirschsprung disease (HSCR, aganglionic megacolon) is a common congenital malformation leading to bowel obstruction, with an incidence of 1/5,000 live births. It is characterized by the absence of intrinsic ganglion cells in the myenteric and submucosal plexuses along variable lengths of the gastrointestinal tract.  ",
+    "relevant_passage_ids": [
+      8894691,
+      10980580,
+      21656899,
+      22184102,
+      20860806,
+      23272425,
+      8401580,
+      22974608,
+      9556633,
+      22131258,
+      16080919,
+      16618617,
+      23836442,
+      23043324,
+      8896569
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 4073,
+    "question": "The Shingrix vaccine is used to prevent what disease?",
+    "answer": "Shingrix is a 4-component vaccine against capsular herpes zoster (4CZV), which has recently been licensed in Europe, Canada and Australia.",
+    "relevant_passage_ids": [
+      31423396,
+      31258310,
+      33163688,
+      31400911,
+      31399377,
+      32999027,
+      30145235,
+      30370455,
+      32606264,
+      33067034,
+      32862397
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 2462,
+    "question": "Can radius fracture cause carpal tunnel syndrome?",
+    "answer": "Yes, carpal tunnel syndrome is a common complication associated with distal radius fractures.",
+    "relevant_passage_ids": [
+      28336098,
+      26566562,
+      23026468,
+      28638948,
+      21505639,
+      10207976,
+      28511570,
+      27454517,
+      21786553,
+      29169594,
+      25920637
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 4185,
+    "question": "What effect does Methylsulfonylmethane (MSM) have on inflammation?",
+    "answer": "Methylsulfonylmethane (MSM) is a sulfur-based nutritional supplement that is purported to have pain and inflammation-reducing effects.",
+    "relevant_passage_ids": [
+      23011466,
+      33114764,
+      29214616,
+      25461402,
+      23013531,
+      32466845,
+      32562081,
+      27447722,
+      28666801,
+      17516722,
+      30038844,
+      32619204,
+      19336900,
+      27844051,
+      28300758,
+      26684635,
+      23595869,
+      32429534,
+      21463646,
+      32234879,
+      12387309,
+      28736511
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 2523,
+    "question": "What causes Black Lung?",
+    "answer": "Black lung, also known as pneumoconiosis, is caused by chronic exposure to coal dust.",
+    "relevant_passage_ids": [
+      8199664,
+      8803434,
+      8456342,
+      6453959
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 3229,
+    "question": "What conditions are associated with mutations in the gene FAAH?",
+    "answer": "Human FAAH gene mutations are associated with increased body weight and obesity. Results suggest that genetic mutations in FAAH may constitute important risk factors for problem drug use and support a potential link between functional abnormalities in the endogenous cannabinoid system and drug abuse and dependence.\nresearch on the genetic modulation of pain has already identified variants in these genes, relative to pain, which may facilitate the pharmacogenetic assessments of new analgesics.",
+    "relevant_passage_ids": [
+      10764768,
+      20942817,
+      27327781,
+      20098695,
+      12060782,
+      22912404,
+      22442717
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 711,
+    "question": "Do proton pump inhibitors affect thyroxine absorption?",
+    "answer": "Proton-pump inhibitors, antacids and a long list of drugs may decrease thyroxine absorption.\nPatients with hypothyroidism and normal TSH values during LT4 replacement therapy may need additional thyroid function testing after treatment with PPIs and may need adjustment of their LT4 dose.",
+    "relevant_passage_ids": [
+      20694403,
+      22019751,
+      16477543,
+      15073769,
+      19942153,
+      17669709,
+      9416973,
+      18942671,
+      16971728,
+      7865648,
+      16918738,
+      23565522,
+      18996189
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 3437,
+    "question": "Name two inhalable insulin products.",
+    "answer": "Despite discontinuation of the first inhalable insulin, Exubera(r), due to suboptimal market acceptance, development of orally inhaled insulin delivery systems has been galvanized by the recent approval of Afrezza(r).",
+    "relevant_passage_ids": [
+      25485886
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 3775,
+    "question": "What kind of mutations cause GRK1 associated Oguchi disease?",
+    "answer": "Biallelic mutations in G-Protein coupled receptor kinase 1 (GRK1) cause Hutchinson-Gilford disease as well as congenital stationary night blindness in around 90% of patients.",
+    "relevant_passage_ids": [
+      33252155
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 3662,
+    "question": "Should Lubeluzole be used for treatment of ischemic stroke?",
+    "answer": "No. Lubeluzole failed to consistently show an efficacy in the treatment of acute stroke and should not be used.",
+    "relevant_passage_ids": [
+      8553408,
+      29550817,
+      11062273,
+      12038658,
+      28939972,
+      9412611,
+      11869612,
+      9619701
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 4415,
+    "question": "Where is the protein \"Single-stranded DNA-binding protein\" found?",
+    "answer": "In the mitochondrion (mitochondrial single-stranded DNA binding protein, mtSSB) and its role is the regulation of mitochondrial DNA replication initiation in mammalian mitochondria.",
+    "relevant_passage_ids": [
+      34215584,
+      34539752,
+      34185867,
+      33847964,
+      33847967
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 377,
+    "question": "Why are insulators necessary in gene therapy vectors?",
+    "answer": "a) They inhibit oncogene activation upon vector integration and b) They maximize the probability of vector expression upon integration in heterochromatinic regions",
+    "relevant_passage_ids": [
+      21562592,
+      21475904,
+      19352322,
+      12200360,
+      19536296,
+      21247248,
+      15638709,
+      19746166,
+      24312663,
+      24098520,
+      14683449,
+      23786330,
+      9368350,
+      21205311
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 2359,
+    "question": "Describe mechanism of action of Ozanimod.",
+    "answer": "Ozanimod is a novel, selective, oral sphingosine-1-phosphate (1 and 5) receptor modulator in clinical development for the treatment of chronic immune-mediated, inflammatory diseases, such as multiple sclerosis and inflammatory bowel disease. Yet its exact mechanism of action is unknown.",
+    "relevant_passage_ids": [
+      26702336,
+      28765121,
+      28783871,
+      27049060,
+      28398597,
+      26239599,
+      27144850,
+      28147349,
+      29125718,
+      26398681,
+      28812220,
+      28279838,
+      26990079
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 2483,
+    "question": "Are the human bombesin receptors, GRPR and NMBR, frequently overexpressed G-protein-coupled-receptors by lung-cancers?",
+    "answer": "The human bombesin receptors, GRPR and NMBR, are two of the most frequently overexpressed G-protein-coupled-receptors by lung-cancers",
+    "relevant_passage_ids": [
+      20438784,
+      10545285,
+      25554218,
+      18975117,
+      21060250,
+      22828605
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 3891,
+    "question": "What is a bacteriocin?",
+    "answer": "Bacteriocins, the ribosomally produced antimicrobial peptides of bacteria, represent an untapped source of promising antibiotic alternatives.\nOne such strategy involves using narrow-spectrum protein antibiotics (so-called bacteriocins), which diverse bacteria use to compete against closely related species.",
+    "relevant_passage_ids": [
+      31705720,
+      31794868,
+      31483516
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 4343,
+    "question": "Describe the N6-methyladenosine RNA modification in AML",
+    "answer": "The N6-methyladenosine RNA modification in AML is a nucleotide that is not normally found in the DNA of cancer cells. This nucleotide has been shown to have an effect on the cell's ability to divide.",
+    "relevant_passage_ids": [
+      33337619
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 294,
+    "question": "What distinguishes lantibiotics from antibiotics?",
+    "answer": "Lantibiotic compounds are ribosomally synthesized antimicrobial peptides against which bacteria are not able to produce resistance, hence making them a good alternative to antibiotics. It is interesting that low levels of resistance have been reported for lantibiotics compared with commercial antibiotics. Given that there are very few examples of naturally occurring lantibiotic resistance, attempts have been made to deliberately induce resistance phenotypes in order to investigate this phenomenon. Other general forms of resistance include the formation of spores or biofilms, which are a common mechanistic response to many classes of antimicrobials.",
+    "relevant_passage_ids": [
+      8264800,
+      24210177,
+      19009315,
+      24069959,
+      21470152,
+      25787977,
+      23475977,
+      21905643,
+      19393544,
+      1482192,
+      23168402,
+      11945173,
+      12361237,
+      24621781,
+      15044440
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 444,
+    "question": "What is the percentage of responders to tetrabenazine treatment for dystonia in children?",
+    "answer": "Tetrabenazine is used empirically in the treatment of dystonia in children with variable success. Observational studies report improvement of up to > 60% of the patients.",
+    "relevant_passage_ids": [
+      18555882,
+      6889706,
+      9040721,
+      9549503,
+      3400500,
+      2904118,
+      22515742,
+      6128697,
+      12710012,
+      6502174,
+      19808991
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 2635,
+    "question": "How is Hsd17b1 associated with endometriosis?",
+    "answer": "Evidence for association between the Ser312Gly polymorphism in HSD17B1 and endometriosis was found in a Japanese population. The A-allele of HSD17B1 appears to confer higher risk for endometriosis.  Inhibition of the estradiol-synthesizing enzyme 17beta-hydroxysteroid dehydrogenase type 1 (17beta-HSD1) has been proposed as a promising new therapeutic option to treat estrogen-dependent diseases like endometriosis",
+    "relevant_passage_ids": [
+      15640252,
+      19014997
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 4139,
+    "question": "What methodology does the FoundationOne CDx test use?",
+    "answer": "FoundationOne CDx is a next generation sequencing (NGS) based test.",
+    "relevant_passage_ids": [
+      32393302
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 2339,
+    "question": "How does Dst1 knock-out affect transcription in yeast?",
+    "answer": "While TFIIS has a pronounced effect on transcription elongation in vitro, the deletion of DST1 has no major effect on cell viability. We showed that:  dst1 and rpb9 mutants have a synthetic growth defective phenotype when combined with fyv4, gim5, htz1, yal011w, ybr231c, soh1, vps71, and vps72 mutants that is exacerbated during germination or at high salt concentrations. In vivo, some dst1 mutants were partly defective in tRNA synthesis and showed a reduced Pol III occupancy at the restrictive temperature.",
+    "relevant_passage_ids": [
+      15359273,
+      15082542,
+      28521214,
+      14690608,
+      18628399,
+      16492753,
+      17535246,
+      24780862,
+      14704159
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 18,
+    "question": "Where is the protein Pannexin1 located?",
+    "answer": "The protein Pannexin1 is localized to the plasma membranes.",
+    "relevant_passage_ids": [
+      24782784,
+      26100513,
+      24694658,
+      25007779,
+      24642372,
+      25698922,
+      19409451,
+      17064878,
+      25056878,
+      24194896
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 1478,
+    "question": "Is Titin the largest single protein molecule found in Nature?",
+    "answer": "Titin, is definitely the largest protein in the body, with a molecular weight of 3 million Dalton and composed of 27,000 amino acids. Titin is the largest protein known to date and acts as a mechanosensor that regulates muscle protein expression in a sarcomere strain-dependent fashion.",
+    "relevant_passage_ids": [
+      1859393,
+      21257761,
+      16453158,
+      1582406,
+      14572168,
+      2129545,
+      14600266,
+      12187564,
+      19962382,
+      21075826,
+      16702235,
+      19134271
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 867,
+    "question": "Are psammoma bodies characteristic to meningiomas?",
+    "answer": "Yes, psammoma bodies are commonly seen and are characteristic to meningiomas. However, they can be also present in other types of tumors or non-neoplastic tissues.",
+    "relevant_passage_ids": [
+      2168257,
+      8162148,
+      3736772,
+      10396741,
+      1492779,
+      8336812,
+      1630573,
+      6699695,
+      7487408,
+      8712177,
+      8629394,
+      19373908,
+      3776472,
+      7015802,
+      8727067,
+      3020860
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 335,
+    "question": "Which cellular processes are regulated by Nanog?",
+    "answer": "The pluripotency sustaining factor Nanog, controls a cascade of pathways that are intricately connected to govern pluripotency, self-renewal, genome surveillance and cell fate determination. Elevated expression of Nanog has also been reported to result in clonal expansion of murine ESCs, but it also plays a role in tumor development. A positive regulator of cell proliferation, it is essential for G1 to S transition in human embryonic stem cells while it regulates primordial germ cell migration.",
+    "relevant_passage_ids": [
+      16518401,
+      14728807,
+      20578184,
+      20581802,
+      20962578,
+      22315219,
+      22493428,
+      22378194,
+      19415763,
+      22421047,
+      22934707,
+      19544407,
+      19139263
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 2835,
+    "question": "Describe the mechanism of action of ibalizumab.",
+    "answer": "Ibalizumab is a humanized monoclonal antibody that acts as post-attachment inhibitor by binding CD4 2nd domain of T lymphocyte and preventing HIV connection to CCR5 or CXCR4. It has been recently approved by Food and Drug Administration as a new intravenous antiretroviral agent for heavily treated HIV adults with multi -drug resistant infection.",
+    "relevant_passage_ids": [
+      29675744,
+      24853313,
+      29689540,
+      21289125,
+      20698725,
+      30378502,
+      24097413,
+      21134642,
+      25342515,
+      19015347,
+      29989910,
+      20463063,
+      29746266,
+      28429756,
+      30110589,
+      23023102
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 1371,
+    "question": "Which are the most under-represented oligonucleotides in higher eukaryote genomes?",
+    "answer": "The oligonucleotides containing the CG and TA dinucleotide are generally under-represented in higher eukaryote genomes",
+    "relevant_passage_ids": [
+      8893856,
+      11070050,
+      1741388,
+      19536338,
+      16531485,
+      12112308,
+      3996596,
+      9725240,
+      12943801,
+      7504188,
+      7498525,
+      8543806
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 1609,
+    "question": "How does Foxa transcription factor exhibits its pioneering function?",
+    "answer": "The conceptional framework of the mechanism of action of the FoxA proteins is that these 'pioneer factors' that can engage chromatin before other transcription factors. The Fox DNA-binding domain structurally resembles linker histone and binds nucleosomes stably. FoxA induces local DNA demethylation, nucleosome destabilization and binds to mitotic chromosomes. When associated with mitotic chromatin, FoxA may \"bookmark\" active genes and ensure their reactivation in postmitotic cells (epigenetic memory). About one-third of the FoxA bound sites are near silent genes, including genes without detectable RNA polymerase II. The \"pioneer\" features of FoxA factors involve various chromatin-binding parameters seen in linker histones and distinguish the factors with respect to their regulatory and mechanistic functions.",
+    "relevant_passage_ids": [
+      19339686,
+      21502411,
+      21404180,
+      22406422,
+      21935353,
+      25436603,
+      16909212,
+      20591647
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 3010,
+    "question": "In clinical trials, the H3 R antagonist CEP-26401 has a positive effect on cognition, yes or no?",
+    "answer": "The H3 R antagonist CEP-26401 had an effect on cognition.",
+    "relevant_passage_ids": [
+      18469850,
+      22001260,
+      27222271
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 4295,
+    "question": "Which drugs are included in the CAPOX chemotherapy regimen for colorectal cancer?",
+    "answer": "CAPOX chemotherapy regimen for colorectal cancer includes capecitabine plus oxaliplatin.",
+    "relevant_passage_ids": [
+      17653254,
+      33977607,
+      17079693,
+      32053133,
+      34877325,
+      28174487,
+      20643620,
+      31832229,
+      17548840,
+      33023657,
+      27330345,
+      33340853,
+      18544957,
+      31254462,
+      29423680,
+      21300933,
+      19949897,
+      18361802,
+      33790157,
+      32588749,
+      33215454,
+      30248163,
+      29802221,
+      32994804,
+      32156916,
+      21063416,
+      32399998,
+      33144447
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 2646,
+    "question": "What is break induced replication?",
+    "answer": "Break-induced replication (BIR) is an important pathway specializing in repair of one-ended double-strand DNA breaks (DSBs). This type of DSB break typically arises at collapsed replication forks or at eroded telomeres. BIR initiates by invasion of a broken DNA end into a homologous template followed by initiation of DNA synthesis that can proceed for hundreds of kilobases.",
+    "relevant_passage_ids": [
+      28427283
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 2116,
+    "question": "How many topological associated domains are contained in the human Hox cluster?",
+    "answer": "transcriptional activation is associated with a dynamic bi-modal 3d organization, whereby the genes switch autonomously from an inactive to an active compartment.",
+    "relevant_passage_ids": [
+      24843030
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 3292,
+    "question": "What receptor is associated with the protein encoded by the Sp\u00e4tzle gene?",
+    "answer": "Currently, as a ligand for the Toll-1 receptor, only Spatzle (Spz) has been identified and characterized.",
+    "relevant_passage_ids": [
+      30361090,
+      8124709,
+      30308293,
+      11536362,
+      31088910,
+      30146479,
+      7590233
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 761,
+    "question": "What is the mechanism of action of anticoagulant medication Dabigatran?",
+    "answer": "Dabigatran is orally administered, reverisble direct and competetive inhibitor of both free and bouded thrombin.",
+    "relevant_passage_ids": [
+      18425569,
+      22388002,
+      21666370,
+      20589316,
+      23031622,
+      19888525,
+      16637459,
+      23466964,
+      21988948,
+      21526168,
+      22480286,
+      20888031
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 566,
+    "question": "Oxantel is used for periodontitis treatment. How does it work?",
+    "answer": "Oxantel, a cholinergic anthelmintic and fumarate reductase inhibitor, significantly inhibited biofilm formation by P. gingivalis and disrupted established biofilms.",
+    "relevant_passage_ids": [
+      20038616,
+      24165189
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 2886,
+    "question": "What is the role of the Leucosporidium ice-binding protein",
+    "answer": "Arctic yeast Leucosporidium sp. produces a glycosylated ice-binding protein (LeIBP) with a molecular mass of \u223c25 kDa, which can lower the freezing point below the melting point once it binds to ice. ce-binding proteins (IBPs) inhibit ice growth through direct interaction with ice crystals to permit the survival of polar organisms in extremely cold environments.",
+    "relevant_passage_ids": [
+      22303017,
+      24699650,
+      23203635,
+      30296411
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 2956,
+    "question": "List potential reasons regarding why potentially important genes are ignored",
+    "answer": "Differences in attention can be explained, to a large extent, exclusively from a small set of identifiable chemical, physical, and biological properties of genes. Together with knowledge about homologous genes from model organisms, these features accurately predict the number of publications on individual human genes, the year of their first report, the levels of funding awarded by the National Institutes of Health (NIH), and the development of drugs against disease-associated genes.",
+    "relevant_passage_ids": [
+      30226837
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 2260,
+    "question": "Describe mechanism of action of Napabucasin.",
+    "answer": "Napabucasin (BBI608) is an orally administered small molecule that blocks stem cell activity in cancer cells by targeting the signal transducer and activator of transcription 3 (STAT3) pathway.",
+    "relevant_passage_ids": [
+      29056905,
+      26899963,
+      28683005,
+      28573435
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 3524,
+    "question": "Describe the Java Adverse Drug Event (JADE) tool",
+    "answer": "The Java Adverse Drug event (Jade) is a tool for medical researchers to explore adverse drug events using health insurance plans and drug-drug interactions.",
+    "relevant_passage_ids": [
+      25298803,
+      20465815
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 3101,
+    "question": "What is the mechanism of action of Solriamfetol?",
+    "answer": "Solriamfetol is a selective norepinephrine-dopamine reuptake inhibitor. It is used to treat excessive sleepiness in obstructive sleep apnea and narcolepsy patients.",
+    "relevant_passage_ids": [
+      30269642,
+      29891587,
+      30365900,
+      30521757
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 4055,
+    "question": "Is progeria caused by an autosomal recessive gene?",
+    "answer": "Yes. Progeria is caused by an autosomal recessive gene.",
+    "relevant_passage_ids": [
+      17664768,
+      19432833,
+      28660486,
+      27931782,
+      29149836,
+      17219342,
+      16598422,
+      19875478,
+      33087645,
+      17375009,
+      21365542,
+      17028399,
+      16838330,
+      32360386,
+      27617860,
+      22971867,
+      3228132,
+      32596971,
+      32528764
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 2056,
+    "question": "Is PUVA therapy indicated for eczema treatment?",
+    "answer": "Yes, PUVA (psoralen plus UVA) therapy is effective for eczema treatment and has relatively few side effects.",
+    "relevant_passage_ids": [
+      18712324,
+      10721861,
+      22738245,
+      8445063,
+      14699368,
+      9146535,
+      17673386,
+      10321515,
+      17254029,
+      8088142,
+      7662576,
+      11499537,
+      9640882,
+      19292787,
+      708596,
+      23420314,
+      3903677,
+      15611423
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 2875,
+    "question": "A herd immunity of what percentage of the population is required to prevent sporadic outbreaks?",
+    "answer": "A herd immunity of 95% of the population is required to prevent sporadic outbreaks.",
+    "relevant_passage_ids": [
+      24303998
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 2533,
+    "question": "Are paralog genes co-regulated?",
+    "answer": "Paralog genes arise from gene duplication events during evolution, which often lead to similar proteins that cooperate in common pathways and in protein complexes. Consequently, paralogs show correlation in gene expression.",
+    "relevant_passage_ids": [
+      28667373,
+      20482863,
+      16860306,
+      27634932,
+      20621981,
+      18493055
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 3796,
+    "question": "What does Retapamulin treat?",
+    "answer": "Retapamulin  is a small molecule covalently binding and inhibiting the bacterium Staphylococcus aureus (MRSA).",
+    "relevant_passage_ids": [
+      22777229,
+      28874907,
+      18341664,
+      23793314,
+      16940066,
+      18041900,
+      28491950,
+      25250996,
+      25396674,
+      17350985,
+      18725451,
+      18416589,
+      20066388,
+      18389088,
+      18973410,
+      23837927,
+      24935401,
+      21191403,
+      19344241,
+      20941943,
+      16957433
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 3386,
+    "question": "What is the effect of Satb1 knock-out in mice?",
+    "answer": "inhibited cell viability and migration",
+    "relevant_passage_ids": [
+      30024617,
+      15851481,
+      29388727
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 659,
+    "question": "What is the clinical indication of cardiac T1 mapping magnetic resonance?",
+    "answer": "T1 mapping can quantitatively characterize myocardial tissue, in particular diffuse and interstitial fibrosis, edema in both overt and subclinical cardiophyopathies. However more research is required before a large-scale application for clinical decision-making can be recommended.",
+    "relevant_passage_ids": [
+      23272704,
+      25424139,
+      21974927,
+      23564562,
+      24425501,
+      24058912,
+      24036385,
+      22161952,
+      24566951,
+      23071146,
+      23549230,
+      24903343,
+      23498672,
+      23498674,
+      24931636,
+      12765114,
+      24124732,
+      24043965,
+      17896383,
+      24576837,
+      23403334,
+      22279111,
+      23845576,
+      22309452,
+      22967246,
+      23408722,
+      25310419,
+      22710483,
+      24518490,
+      24472162,
+      23349348,
+      22720998,
+      17659622,
+      23280998,
+      22903654,
+      19007595,
+      23890156,
+      23643513,
+      24011774
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 1100,
+    "question": "Provide examples of how molecular transporters contribute to multi-drug resistance in bacteria.",
+    "answer": "MDR efflux pumps began causing clinical problems relatively recently, in parallel with the extensive use of antibiotics in medicine and as supplements in animal feeds. However, our analyses indicate that these MDR efflux pumps did not arise through recent mutations in genes encoding transporters that changed their substrate specificities.\n\nInstead, such MDR pumps are encoded within the genomes of virtually all microorganisms, so these genes are present and thus need only to be activated to become problematic. Moreover, lateral transfer of genes among bacteria has occurred frequently, particularly for plasmid-encoded systems, suggesting that such genes can be acquired fairly readily even if they are not initially present. Finally, although mutations that enable transporters to act on different types of substrate are rare, experiments and phylogenetic analyses indicate that simple point mutations can readily narrow or broaden a particular transporter's specificity toward a single class of compounds (e.g., sugars, amino acids, or drugs).",
+    "relevant_passage_ids": [
+      24014018,
+      24056102,
+      23755047,
+      24123816,
+      23870163,
+      23742803,
+      23746717,
+      24297686,
+      23894076,
+      22053181,
+      16290174
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 4618,
+    "question": "Which disease is treated with Emapalumab?",
+    "answer": "Emapalumab is a human monoclonal antibody directed against interferon-\u03b3 (IFN-\u03b3) that was approved by the Food and Drug Administration for primary hemophagocytic lymphohistiocytosis (HLH).",
+    "relevant_passage_ids": [
+      33686916,
+      32817285,
+      32447592,
+      34096649,
+      32374962,
+      30623346,
+      32648854,
+      31537529,
+      33484058,
+      33424859
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 1433,
+    "question": "List anti-amyloid-beta monoclonal antibodies that have been investigated in clinical trials for treatment of Alzheimer disease.",
+    "answer": "Ponezumab, solanezumab and bapineuzumab are humanized antiamyloid beta (A\u03b2) monoclonal antibodies that have been designed for treatment of Alzheimer disease.",
+    "relevant_passage_ids": [
+      21504387,
+      22339463,
+      20154508,
+      22277519,
+      22292124,
+      19585948,
+      21784350,
+      16338209,
+      23574434,
+      21091109,
+      22473769,
+      23334069,
+      23334070,
+      23796662,
+      20189881,
+      21987394,
+      20205639,
+      19228370,
+      21883222,
+      21263194,
+      20505438,
+      19923550,
+      20375655,
+      20360050,
+      22134132,
+      21592055
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 3496,
+    "question": "What has pimavanserin been approved for by the FDA (2018)?",
+    "answer": "Pimavanserin was approved for the treatment of hallucinations and delusions associated with Parkinson's disease psychosis.",
+    "relevant_passage_ids": [
+      28493654
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 418,
+    "question": "Is there evidence that tomato juice lowers cholesterol levels?",
+    "answer": "Yes, there is evidence to suggest that tomato juice (and other tomato products) can decrease cholesterol concentrations. It was shown that tomatoes inhibit cholesterol biosynthesis.",
+    "relevant_passage_ids": [
+      24392102,
+      22098224,
+      17617941,
+      22223578,
+      21755327
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 3421,
+    "question": "What is the target of the drug Olmesartan?",
+    "answer": "Olmesartan (OL) is the pharmacologically active metabolite of Olmesartan medoxomil (OM), an FDA-approved angiotensin II receptor antagonist for administrating cardiovascular diseases",
+    "relevant_passage_ids": [
+      29414040,
+      29872491,
+      30217371
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 4495,
+    "question": "When is lorlatinib used?",
+    "answer": "Lorlatinib is a third-generation ALK inhibitor that can overcome the largest number of acquired ALK resistance mutations, including the solvent-front mutation G1202R.",
+    "relevant_passage_ids": [
+      34589977,
+      34585621,
+      34548910
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 1819,
+    "question": "What disease is the drug aducanumab targeting?",
+    "answer": "Aducanumab is an anti-A\u03b2 antibody being developed for the treatment of Alzheimer's disease (AD).",
+    "relevant_passage_ids": [
+      27251914,
+      27810931,
+      27025652,
+      27582220
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 472,
+    "question": "How do Hsp70 and Hsp110 affect mRNA stability?",
+    "answer": "Hsp70 and Hsp110 act as RNA-binding entities in vivo to guide the appropriate folding of RNA substrates for subsequent regulatory processes such as mRNA degradation and/or translation.",
+    "relevant_passage_ids": [
+      10358092
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 4049,
+    "question": "What eye disease(s) are associated with ocular toxoplasmosis?",
+    "answer": "Retinochoroiditis is the most frequent manifestation of congenital toxoplasmosis Infectious uveitis accounted for 37% of posterior uveitis cases of which toxoplasmosis was the most common cause. Toxoplasmosis was the most common cause of posterior uveitis (60%)",
+    "relevant_passage_ids": [
+      30332547,
+      25127047,
+      31429610,
+      31589483,
+      33060522,
+      32068467,
+      17596951,
+      15906073
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 3687,
+    "question": "Is BCL11B involved in schizophrenia?",
+    "answer": "Yes, BCL11B is associated with attention, memory, executive function and antipsychotic-induced schizophrenia.",
+    "relevant_passage_ids": [
+      30040823
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 4142,
+    "question": "Where is corticosterone synthesized?",
+    "answer": "Following a stressful event, the hypothalamus-pituitary-adrenal axis mediates the release of the stress hormone cortisol (corticosterone in rodents; CORT).",
+    "relevant_passage_ids": [
+      31953122,
+      31972205,
+      30318934,
+      32347034,
+      32047871
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 4664,
+    "question": "What is the 4D nucleome project?",
+    "answer": "The 4D Nucleome Network aims to develop and apply approaches to map the structure and dynamics of the human and mouse genomes in space and time with the goal of gaining deeper mechanistic insights into how the nucleus is organized and functions. The project will develop and benchmark experimental and computational approaches for measuring genome conformation and nuclear organization, and investigate how these contribute to gene regulation and other genome functions. Validated experimental technologies will be combined with biophysical approaches to generate quantitative models of spatial genome organization in different biological states, both in cell populations and in single cells.",
+    "relevant_passage_ids": [
+      28905911
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 1994,
+    "question": "Which histone mutation is associated with gliomas?",
+    "answer": "Pediatric central nervous system tumors are the most common solid tumor of childhood. Over 70% of diffuse intrinsic pediatric gliomas, an aggressive brainstem tumor, harbor heterozygous mutations that create a K27M amino acid substitution (methionine replaces lysine 27) in the tail of histone H3.3.",
+    "relevant_passage_ids": [
+      25525250,
+      26297251,
+      24242757,
+      27034984,
+      27701736,
+      22661320,
+      24285547,
+      25170156,
+      25773741,
+      23539183,
+      26517431,
+      26957305,
+      27392443,
+      25401693,
+      23603901
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 4657,
+    "question": "What part of the body is associated with Cauda equina",
+    "answer": "The cauda equina is the sack of nerve roots (nerves that leave the spinal cord between spaces in the bones of the spine to connect to other parts of the body) at the lower end of the spinal cord.",
+    "relevant_passage_ids": [
+      33261250,
+      27753733,
+      32541159,
+      3356808,
+      11311464,
+      22764663,
+      34321945,
+      18664636,
+      22254963,
+      10797973,
+      22996855,
+      26442520,
+      25495513,
+      23101243,
+      3806684
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 3542,
+    "question": "What particles is Hadron therapy using?",
+    "answer": "Hadron therapy is using proton beams.",
+    "relevant_passage_ids": [
+      29625810,
+      28884707,
+      29609813
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 4187,
+    "question": "Why mothers with a CYP2D6 ultrarapid metabolizer phenotype may expose their infants to risk of adverse events when taking codeine while breastfeeding?",
+    "answer": "Mothers with a CYP2D6 ultrarapid metabolizer phenotype may expose their infants to risk of adverse events when taking codeine while breastfeeding, by producing more of the active metabolite, morphine.",
+    "relevant_passage_ids": [
+      28696420
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 2126,
+    "question": "What is the inheritance of the glucose-6-phosphate dehydrogenase (G6PD) deficiency?",
+    "answer": "Glucose-6-phosphate dehydrogenase (G6PD) deficiency is the commonest red cell enzymopathy in humans and has a recessive X-linked inheritance.",
+    "relevant_passage_ids": [
+      12737943,
+      15226563,
+      10066026,
+      25116429,
+      631693,
+      6350992,
+      26275698,
+      24865682,
+      11261779,
+      24460025,
+      1634454,
+      10698963,
+      11271380,
+      12169625,
+      1953691,
+      1188317,
+      24943486
+    ],
+    "qtype": "definition"
+  },
+  {
+    "query_id": 3415,
+    "question": "Describe the mechanism of action of Trilaciclib.",
+    "answer": "Trilaciclib is cyclin-dependent kinase 4 and 6 (CDK4/6) inhibitor, which act by inhibiting progression from the G1 to S phases of the cell cycle.",
+    "relevant_passage_ids": [
+      28446688,
+      29726787,
+      31504118
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 1557,
+    "question": "Describe mechanism of action of PLX3397 drug.",
+    "answer": "PLX3397 works by inhibiting colony-stimulating-factor-1 receptor (CSF1R).",
+    "relevant_passage_ids": [
+      26156998,
+      24247719,
+      25042473,
+      25110953,
+      24583793,
+      24718867,
+      26222558
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 2148,
+    "question": "Describe the mechanism of action of Bezlotoxumab?",
+    "answer": "Bezlotoxumab (Zinplava\u2122) is a human monoclonal antibody against Clostridium difficile toxin B (TcdB). It is used for prevention of  recurrent C. difficile infections.",
+    "relevant_passage_ids": [
+      25385797,
+      25451052,
+      27757389,
+      25486992,
+      27527088,
+      24821719,
+      27753689,
+      27905086
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 3541,
+    "question": "How does LB-100 affect the DDR proteins (BRCA1, Chk2, and \u03b3H2AX)?",
+    "answer": "LB100 induced constitutive hyperphosphorylation of DDR proteins (BRCA1, Chk2, and gH2AX).",
+    "relevant_passage_ids": [
+      25376608
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 315,
+    "question": "Which gene mutations are responsible for isolated Non-compaction cardiomyopathy?",
+    "answer": "The gene mutations that have been shown to be the causes of isolated non-compaction cardiomyopathy are alpha-tropomyosin, alpha-tropomyosin, troponin T and desmoplakin",
+    "relevant_passage_ids": [
+      17956225,
+      20542340,
+      23314057,
+      21604106,
+      22859017,
+      18159245,
+      22619057,
+      18395448,
+      19467449,
+      17101628,
+      19028670,
+      23074372,
+      24015429,
+      19438153,
+      21789513,
+      17947214,
+      21285074,
+      21551322,
+      23800289,
+      20386670,
+      23147248,
+      20083571,
+      21894393,
+      14662268
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 2670,
+    "question": "The TRPM2 gene is associated with development of spontaneous thromboembolism?",
+    "answer": "TheTransientReceptorPotentialMelastatin 2 (TRPM2) is a member of G protein coupled receptor superfamily and a novel dual-function protein that possesses both ion channel andAdenosine 5'-DiphosPhataseRibose (ADPR) hydrolase function. TRPM2 is involved in Ca2+signaling in various cells as an endogenous redox sensor for oxidative stress and reactive oxygen species, and contributes to cytokine production, insulin release, motility, Ca2+entry and Ca2+-dependent cellular reactions such as endothelial hyper-permeability and apoptosis and may regulate the bacteriocidal activity of Macrophages",
+    "relevant_passage_ids": [
+      21140288,
+      12765697,
+      26558786,
+      22475739,
+      25236871,
+      15708008,
+      28199210,
+      18957938,
+      23129587,
+      27616276,
+      28082421,
+      28970008,
+      16252251,
+      20515676,
+      22487454,
+      23371039
+    ],
+    "qtype": "effect"
+  },
+  {
+    "query_id": 3438,
+    "question": "How is the mouse Fxy gene evolving?",
+    "answer": " Here, we report that the rate of sequence divergence of the 3' end of the Fxy gene is much higher (estimated at 170-fold higher for synonymous sites) when pseudoautosomal (present on both the X and Y chromosomes) than when X-unique.",
+    "relevant_passage_ids": [
+      17418442,
+      10508587,
+      12615004,
+      9425238
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 4481,
+    "question": "Can Isradipine slow progression of Early Parkinson Disease?",
+    "answer": "No. In a multicenter, randomized, parallel-group, double-blind, placebo-controlled trial Isradipine did not slow progression of Early Parkinson Disease.",
+    "relevant_passage_ids": [
+      33460320,
+      34766657,
+      33716705,
+      32227247
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 2965,
+    "question": "There is no drug available to prevent HIV infection, Pre-exposure prophylaxis (PrEP), yes or no?",
+    "answer": "Pre-exposure prophylaxis (PrEP) with the drug combination Truvada can substantially decrease HIV transmission in individuals at risk.",
+    "relevant_passage_ids": [
+      28370177,
+      23570850,
+      25987851,
+      27177804,
+      29278542,
+      28657199,
+      21799568,
+      27900502,
+      23972284,
+      26746652
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 441,
+    "question": "How does trimetazidine affect intracellular kinase signaling in the heart?",
+    "answer": "Trimetazidine activates AMPK in diabetic myocardium. Trimetazidine  when administered before reperfusion results in activation of p38 mitogen-activated protein kinase and Akt signaling. Trimetazidine  when administered during reperfusion does not affect p38MAPK and JNK activation.",
+    "relevant_passage_ids": [
+      19546072,
+      20167841,
+      20383170,
+      15616764
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 1523,
+    "question": "Can siRNA affect response to afatinib treatment?",
+    "answer": "When afatinib was combined with an EGFR-specific siRNA there was a strong biological effect on growth inhibition and induction of apoptosis.",
+    "relevant_passage_ids": [
+      23555954,
+      23266614,
+      22436374
+    ],
+    "qtype": "yesno"
+  },
+  {
+    "query_id": 2710,
+    "question": "Cytochrome p450 CYP3A is induced by rifampicin  and compounds used to treat what virus?",
+    "answer": "Etravirine is an effective and well-tolerated recently approved non-nucleoside reverse transcriptase inhibitor (NNRTI) for HIV type-1-infected patients with previous antiretroviral treatment experience.  Etravirine is a weak inducer of cytochrome P450 (CYP)3A",
+    "relevant_passage_ids": [
+      16432264,
+      20834094
+    ],
+    "qtype": "treatment"
+  },
+  {
+    "query_id": 982,
+    "question": "In which nuclear compartments is heterochromatin located?",
+    "answer": "This compartment localizes into three main regions: the peripheral heterochromatin, perinucleolar heterochromatin, and pericentromeric heterochromatin. Silencing appears to be associated with histone H3 lysine 9 trimethylation (H3K9me3), DNA methylation and the localization of the silenced gene to a specific nuclear compartment enriched in these modification",
+    "relevant_passage_ids": [
+      12432450,
+      22251972,
+      16254244,
+      23834025,
+      20026667,
+      21283637,
+      19889207,
+      15564378
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 1197,
+    "question": "Why can't humans synthesize Neu5Gc (N-Glycolylneuraminic acid)?",
+    "answer": "N-Glycolylneuraminic acid (Neu5Gc) is a sialic acid synthesized by animals, but not by humans or birds. Humans lack a functional cytidine monophosphate-N-acetylneuraminic acid hydroxylase (CMAH) protein and cannot synthesize the sugar Neu5Gc, an innate mammalian signal of self. Losing this sugar changed how humans interact with some of our deadliest pathogens: malaria, influenza, and streptococcus among others.",
+    "relevant_passage_ids": [
+      25517696,
+      20452577,
+      24829344,
+      15972653,
+      19156207,
+      22390546,
+      25003133,
+      16806174,
+      18971931,
+      18669916,
+      25124893,
+      23520510,
+      24505439
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 917,
+    "question": "In which isochores are Alu elements enriched?",
+    "answer": "Alu elements are enriched in high GC% isochores due to reduced Alu loss by recombination in these regions. The frequency of Alu sequences increases with increasing GC, but attains a maximum in H2 isochores.",
+    "relevant_passage_ids": [
+      15871047,
+      8828040,
+      19543403,
+      9931467,
+      11591470,
+      6572942,
+      7723057,
+      22057813
+    ],
+    "qtype": "list"
+  },
+  {
+    "query_id": 4245,
+    "question": "What causes Ocular Thelaziasis?",
+    "answer": "Ocular Thelaziasis is caused by Thelazia callipaeda.",
+    "relevant_passage_ids": [
+      30349847,
+      24399399,
+      17211660,
+      25116781,
+      30672496,
+      29087095,
+      28710682
+    ],
+    "qtype": "other"
+  },
+  {
+    "query_id": 585,
+    "question": "How does thyroid hormone regulate mitochondrial biogenesis in the myocardium?",
+    "answer": "T4 increases myocardial mitochondrial bioenergetic capacity, oxygen consumption and markers of mitochondrial biogenesis. The marked, parallel increases in PPARalpha levels suggest its potential involvement in mediating myocardial-specific remodeling of mitochondria in response to T4.  T3 induces mitochondrial biogenesis. In fact, T3 treatment for 72h  increases activity of respiratory complexes II, IV, V and citrate synthase (CS), levels of mitochondrial enzyme subunits (e.g. COXI, COXIV) and nuclear-encoded transcription factors, involved in mitochondrial biogenesis (e.g. PGC-1, mtTFA and PPAR-alpha).  Furthermore, L-T3 increases  the expression of factors involved in mitochondrial DNA transcription and biogenesis, such as hypoxic inducible factor-1\u03b1, mitochondrial transcription factor A and peroxisome proliferator activated receptor \u03b3 coactivator-1\u03b1, in the LV peri-infarct zone.\nThe activation of TFAM and TFB2M expression is shown to be required for the induction of mtDNA biogenesis by T3. Truncated forms of the nuclear receptor TR\u03b11, with molecular weights of 43 kDa (p43) and 28 Kda have been previously identified in mitochondria. P43 is a mitochondrial T3 receptor which stimulates mitochondrial transcription and protein synthesis in the presence of T3. p43 depletion in mice decreases mitochondrial DNA replication and respiratory chain activity.",
+    "relevant_passage_ids": [
+      12734114,
+      15543939,
+      15893763,
+      20515651,
+      22109994,
+      18575627,
+      21914860,
+      19036942,
+      6157679,
+      17962579,
+      19462004,
+      2773621,
+      7556180,
+      21568860,
+      1321044,
+      20100314,
+      215035,
+      12388124
+    ],
+    "qtype": "mechanism"
+  },
+  {
+    "query_id": 3953,
+    "question": "How many nucleotides long is the HOTAIR CNE?",
+    "answer": "The HOTAIR CNE is a 32-nucleotide long conserved noncoding element",
+    "relevant_passage_ids": [
+      32268280
+    ],
+    "qtype": "other"
+  }
+]
