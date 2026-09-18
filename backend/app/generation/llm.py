@@ -76,18 +76,39 @@ class OpenRouterClient:
 
 
 class OllamaClient:
-    def __init__(self, base_url: str, model: str,
-                 usage: Optional[UsageAccumulator] = None):
+    def __init__(self, base_url: str, model: str, num_ctx: int = 16384,
+                 num_predict: int = 1500, usage: Optional[UsageAccumulator] = None):
         import ollama
-        self.client = ollama.Client(host=base_url)
+        self.client = ollama.Client(host=base_url, timeout=20.0)
         self.model = model
+        self.num_ctx = num_ctx
+        self.num_predict = num_predict
         self.usage = usage or UsageAccumulator()
 
     def chat(self, system: str, user: str, temperature: float = 0.1) -> str:
-        resp = self.client.chat(model=self.model,
-                                messages=[{"role": "system", "content": system},
-                                          {"role": "user", "content": user}],
-                                options={"temperature": temperature})
+        try:
+            resp = self.client.chat(
+                model=self.model,
+                messages=[{"role": "system", "content": system},
+                          {"role": "user", "content": user}],
+                think=False,
+                options={
+                    "temperature": temperature,
+                    "num_predict": self.num_predict,
+                    "num_ctx": self.num_ctx,
+                },
+            )
+        except TypeError:
+            resp = self.client.chat(
+                model=self.model,
+                messages=[{"role": "system", "content": system},
+                          {"role": "user", "content": user}],
+                options={
+                    "temperature": temperature,
+                    "num_predict": self.num_predict,
+                    "num_ctx": self.num_ctx,
+                },
+            )
         text = resp["message"]["content"]
         # Local inference: track tokens for accounting, cost stays $0
         pt = int(resp.get("prompt_eval_count") or _estimate_tokens(system + user))
@@ -99,7 +120,8 @@ class OllamaClient:
 def get_llm_client(settings) -> LLMClient:
     usage = UsageAccumulator()
     if settings.LLM_PROVIDER.lower() == "ollama":
-        return OllamaClient(settings.OLLAMA_BASE_URL, settings.OLLAMA_MODEL, usage)
+        return OllamaClient(settings.OLLAMA_BASE_URL, settings.OLLAMA_MODEL,
+                            settings.OLLAMA_NUM_CTX, settings.OLLAMA_NUM_PREDICT, usage)
     if not settings.OPENROUTER_API_KEY:
         raise RuntimeError("LLM_PROVIDER=openrouter but OPENROUTER_API_KEY is empty in .env")
     return OpenRouterClient(settings.OPENROUTER_API_KEY,

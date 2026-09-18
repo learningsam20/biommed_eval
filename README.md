@@ -107,9 +107,12 @@ Then open **http://localhost:5269** (API **http://localhost:5268**). Defaults: `
 ```bash
 make eval-setup               # freeze 100 queries (already in the repo)
 make eval-run                 # lexical, dense, hybrid, expansion
+make eval-judge               # 20-query LLM-judge; JUDGE_FRAMEWORK in .env
 make eval-report              # docs/evaluation_report.md + docs/best_hybrid_config.json
 make test
 ```
+
+`JUDGE_FRAMEWORK` is `custom`, `ragas`, `deepeval`, or `all`. RAGAS **0.4.3** (`llm_factory` / Ollama OpenAI-compat) and DeepEval **4.2.3** (Ollama RAG triad) write into `results/judge/` without replacing the 100-query rank table.
 
 ---
 
@@ -125,7 +128,7 @@ Same 100 query IDs for every config.
 | Hybrid weighted | 0.607 | 0.495 | 82 ms |
 | **Hybrid + expansion** | **0.632** | **0.518** | ~27 s |
 
-Expansion is the best **ranker**. The LLM judge (20 queries) preferred **weighted hybrid** for correctness (0.75 vs 0.58) and groundedness (0.80 vs 0.51). Extra recall costs one LLM round-trip. Local Ollama is $0; hosted models accrue `cost_usd`.
+Expansion is the best **ranker**. On the 20-query LLM-judge (`granite4.1:3b`, temperature 0.0) custom and DeepEval correctness sit at ~0.95–1.0 for lexical, weighted, and expansion — they often score `INSUFFICIENT_EVIDENCE` as 1.0. RAGAS FactualCorrectness (**precision**) is ~0.44–0.48; zeros are uncovered gold claims, insufficient answers, or failed claim-NLI. The judge does **not** pick the winner. Extra recall still costs one LLM round-trip. Local Ollama is $0; hosted models accrue `cost_usd`.
 
 Full table, judge scores, and examples: **[docs/evaluation_report.md](docs/evaluation_report.md)**. Chosen recipe: **[docs/best_hybrid_config.json](docs/best_hybrid_config.json)**. Runner: **[backend/scripts/run_evaluation.py](backend/scripts/run_evaluation.py)**.
 

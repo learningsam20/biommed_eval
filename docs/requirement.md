@@ -62,13 +62,13 @@ Using `relevant_passage_ids`, measure:
 
 ### LLM-judge
 
-Use RAGAS, DeepEval, or an equivalent framework to score:
+Use RAGAS, DeepEval, or the built-in equivalent judge to score:
 
 - Answer correctness
 - Groundedness
 - Context relevance
 
-Judge prompt, model, and settings stay fixed across runs.
+Select the framework with `JUDGE_FRAMEWORK` in `.env`: `custom`, `ragas`, `deepeval`, or `all`. Packages: RAGAS 0.4.3 and DeepEval 4.2.3. Judge prompt, model, and settings stay fixed across runs.
 
 ### Manual review
 

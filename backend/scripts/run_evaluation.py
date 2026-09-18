@@ -79,7 +79,7 @@ def main():
     ap.add_argument("--config", default="all")
     ap.add_argument("--eval-set", default="data/eval_queries_100.json")
     ap.add_argument("--output", default="results/")
-    ap.add_argument("--judge", action="store_true", help="also run LLM-judge (2 LLM calls/query)")
+    ap.add_argument("--judge", action="store_true", help="run LLM-judge frameworks from JUDGE_FRAMEWORK")
     ap.add_argument("--limit", type=int, default=0, help="cap queries (0=all)")
     ap.add_argument("--judge-configs", default="", help="comma list to judge (default: all evaluated)")
     args = ap.parse_args()
@@ -113,7 +113,10 @@ def main():
             print(f"LLM unavailable ({e}) — expansion/judge disabled")
     ctx = {"settings": s, "bm25": bm25, "dense": dense, "llm": llm}
 
-    wanted = CONFIGS if args.config == "all" else [args.config]
+    wanted = CONFIGS if args.config == "all" else [c.strip() for c in args.config.split(",") if c.strip()]
+    unknown = [c for c in wanted if c not in CONFIGS]
+    if unknown:
+        raise SystemExit(f"unknown --config values: {unknown}")
     outdir = resolve_path(args.output)
     outdir.mkdir(parents=True, exist_ok=True)
     _sum_path = resolve_path(args.output) / "summary.json"
@@ -130,19 +133,34 @@ def main():
                     "embedding_model": s.EMBEDDING_MODEL, "vector_db": s.VECTOR_DB,
                     "fusion_default": s.FUSION_METHOD})
     store = ctx["dense"].store if ctx["dense"] is not None else None
-    # Default: judge every evaluated config (not a subset)
+    from app.evaluation.judge import JUDGE_VERSION, parse_judge_frameworks
+    frameworks = parse_judge_frameworks(getattr(s, "JUDGE_FRAMEWORK", "custom"))
     judge_cfg = (args.judge_configs.split(",") if args.judge_configs else wanted)
     judge_cfg = [c.strip() for c in judge_cfg if c.strip()]
     do_judge = args.judge and llm is not None
     if args.judge and llm is None:
         print("judge requested but LLM unavailable — skipping judge")
     if do_judge:
-        from app.evaluation.judge import JUDGE_VERSION
         summary["judge_version"] = JUDGE_VERSION
+        summary["judge_frameworks"] = frameworks
+        provider = s.LLM_PROVIDER.lower()
+        model = s.OLLAMA_MODEL if provider == "ollama" else s.OPENROUTER_MODEL
+        summary["judge_subset"] = {
+            "source": "results/judge",
+            "n_queries": args.limit or len(queries),
+            "judge_model": f"{model} via {provider}",
+        }
+        print(f"judge frameworks: {', '.join(frameworks)}")
 
     def judge_query(q, retrieved_ids):
-        from app.evaluation.judge import run_judge
+        from app.evaluation.judge import (
+            JUDGE_CONTEXT_PASSAGES,
+            JUDGE_QUERY_TIMEOUT_S,
+            score_with_frameworks,
+            primary_scores,
+        )
         from app.generation.answer import generate_grounded_answer, validate_citations
+        deadline = time.monotonic() + JUDGE_QUERY_TIMEOUT_S
         texts = store.fetch_texts([str(i) for i in retrieved_ids[:s.HYBRID_TOP_K]]) if store else {}
         if not texts and store is None:
             import json as _j
@@ -158,24 +176,35 @@ def main():
                             break
         ev = [(pid, texts.get(str(pid), "")) for pid in retrieved_ids[:s.HYBRID_TOP_K]
               if texts.get(str(pid))]
+        ev = ev[:JUDGE_CONTEXT_PASSAGES]
+        print("    answer ...", flush=True)
         ans, cites, insuf = generate_grounded_answer(
             q["question"], ev, llm, s.LLM_TEMPERATURE_ANSWER)
-        js = run_judge(q["question"], q["answer"], ans, ev, llm, s.JUDGE_TEMPERATURE)
+        judges = {}
+        try:
+            judges = score_with_frameworks(
+                frameworks, q["question"], q["answer"], ans, ev, llm, s.JUDGE_TEMPERATURE,
+                deadline=deadline,
+            )
+        except Exception as e:
+            print(f"  frameworks failed q={q['query_id']}: {type(e).__name__}: {e}")
+        primary = primary_scores(judges)
         _, hall = validate_citations(ans, retrieved_ids)
         return {
             "answer": ans[:2000],
             "citations": cites,
             "insufficient_evidence": insuf,
-            "judge_correctness": js.correctness,
-            "judge_groundedness": js.groundedness,
-            "judge_context_relevance": js.context_relevance,
+            "judges": judges,
+            "judge_correctness": primary.correctness,
+            "judge_groundedness": primary.groundedness,
+            "judge_context_relevance": primary.context_relevance,
             "citation_hallucinated": hall,
             "citation_valid": bool(insuf or cites),
         }
 
     eval_queries = queries[:args.limit] if args.limit else queries
-    if args.limit and resolve_path(args.output) == resolve_path("results"):
-        raise SystemExit("refusing to overwrite full results/ with --limit subset; pass --output results_judge<N>")
+    if args.limit and resolve_path(args.output) == resolve_path("results") and not args.judge:
+        raise SystemExit("refusing to overwrite full results/ with --limit subset; pass --output results_judge<N> or add --judge to merge judge scores")
 
     for cfg in wanted:
         if llm is not None and hasattr(llm, "usage"):
@@ -193,16 +222,25 @@ def main():
             row = {"query_id": q["query_id"], "retrieved_ids": ret_ids,
                    "retrieved_scores": ret_scores, **sc}
             if do_judge and cfg in judge_cfg:
+                print(f"  {cfg} {qi + 1}/{len(eval_queries)} q={q['query_id']}", flush=True)
+                t_j = time.perf_counter()
                 try:
                     j = judge_query(q, ret_ids)
                     row.update(j)
                     jscores.append(j)
+                    print(
+                        f"    done {time.perf_counter() - t_j:.0f}s "
+                        f"custom={row.get('judge_correctness')} "
+                        f"ragas={((j.get('judges') or {}).get('ragas') or {}).get('correctness')} "
+                        f"deepeval={((j.get('judges') or {}).get('deepeval') or {}).get('correctness')}",
+                        flush=True,
+                    )
                 except Exception as e:
-                    print(f"  judge failed q={q['query_id']}: {type(e).__name__}")
+                    print(f"  judge failed q={q['query_id']}: {type(e).__name__}: {e}", flush=True)
                     row["judge_error"] = True
             rows.append(row)
             scores.append(sc)
-            if (qi + 1) % 10 == 0:
+            if not do_judge and (qi + 1) % 10 == 0:
                 print(f"  {cfg}: {qi + 1}/{len(eval_queries)}")
         agg = aggregate(scores)
         if llm is not None and hasattr(llm, "usage"):
@@ -221,6 +259,7 @@ def main():
             agg["llm_calls"] = 0
             agg["tokens_per_query"] = 0.0
         if jscores:
+            from app.evaluation.judge import aggregate_frameworks
             n = len(jscores)
             agg["judge_correctness"] = sum(j["judge_correctness"] for j in jscores) / n
             agg["judge_groundedness"] = sum(j["judge_groundedness"] for j in jscores) / n
@@ -228,10 +267,37 @@ def main():
             agg["citation_valid_rate"] = sum(1 for j in jscores if j["citation_valid"]) / n
             agg["insufficient_rate"] = sum(1 for j in jscores if j["insufficient_evidence"]) / n
             agg["n_judged"] = n
-        json.dump(rows, open(outdir / f"{cfg}_results.json", "w"), indent=2)
-        summary["configs"][cfg] = agg
+            agg["judges"] = aggregate_frameworks(jscores)
+        existing_path = outdir / f"{cfg}_results.json"
+        merge_only = (
+            args.judge
+            and args.limit
+            and existing_path.exists()
+            and len(json.loads(existing_path.read_text())) > len(rows)
+        )
+        if merge_only:
+            judge_dir = outdir / "judge"
+            judge_dir.mkdir(parents=True, exist_ok=True)
+            json.dump(rows, open(judge_dir / f"{cfg}_results.json", "w"), indent=2)
+            prev = summary["configs"].get(cfg, {})
+            prev.update({k: v for k, v in agg.items() if k.startswith("judge") or k in (
+                "citation_valid_rate", "insufficient_rate", "n_judged", "judges",
+                "cost_usd", "cost_usd_per_query", "total_tokens", "llm_calls", "tokens_per_query",
+            )})
+            # keep 100-query rank metrics from the previous full run
+            for k in ("recall@5", "recall@10", "mrr@10", "ndcg@10", "latency_ms",
+                      "latency_p50", "latency_p95", "n_queries"):
+                if k in summary["configs"].get(cfg, {}) and k not in (
+                    "cost_usd", "cost_usd_per_query"
+                ):
+                    prev.setdefault(k, summary["configs"][cfg][k])
+            summary["configs"][cfg] = prev
+            print(f"{cfg}: merged judge scores -> {judge_dir / f'{cfg}_results.json'}")
+        else:
+            json.dump(rows, open(outdir / f"{cfg}_results.json", "w"), indent=2)
+            summary["configs"][cfg] = agg
         print(f"{cfg}: " + ", ".join(f"{k}={v:.3f}" if isinstance(v, float) else f"{k}={v}"
-                                     for k, v in agg.items() if k != "n_queries"))
+                                     for k, v in agg.items() if k not in ("n_queries", "judges")))
     json.dump(summary, open(outdir / "summary.json", "w"), indent=2)
     print(f"summary -> {outdir / 'summary.json'}")
 

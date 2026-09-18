@@ -14,58 +14,58 @@ SUCCESS_CASES = [
         "config": "hybrid_weighted",
         "recall@10": 1.0,
         "judge_correctness": 1.0,
-        "note": "Retrieval and judge agree: top hit 25495907 is gold; answer cites ≈80.8× with [25495907].",
-    },
-    {
-        "query_id": 85,
-        "question": "Which transcription factor is considered as a master regulator of lysosomal genes?",
-        "config": "hybrid_weighted",
-        "recall@10": 0.667,
-        "judge_correctness": 1.0,
-        "note": "TFEB correctly grounded with multiple valid passage IDs; high groundedness.",
+        "note": "Top hit 25495907 is gold; answer cites ≈80.8×. Custom, RAGAS precision, and DeepEval all 1.0.",
     },
     {
         "query_id": 318,
         "question": "Describe the mechanism of action of drisapersen",
         "config": "hybrid_weighted",
+        "recall@10": 0.167,
+        "judge_correctness": 0.95,
+        "note": "Antisense-oligo / exon-51 skipping answer; custom 0.95, RAGAS 0.80, DeepEval 1.0.",
+    },
+    {
+        "query_id": 3383,
+        "question": "AhR ligands are attractive drug targets ... due to their induction of Cyp1a1, yes or no?",
+        "config": "hybrid_weighted",
         "recall@10": 0.5,
-        "judge_correctness": 1.0,
-        "note": "Weighted fusion retrieves antisense-oligo context; answer correctly describes exon skipping.",
+        "judge_correctness": 0.95,
+        "note": "Grounded yes-answer with valid cites; custom 0.95, RAGAS 1.0 (was insufficient under the older gemma run).",
     },
 ]
 
 FAILURE_CASES = [
     {
-        "query_id": 318,
-        "question": "Describe the mechanism of action of drisapersen",
+        "query_id": 2218,
+        "question": "How many times is CLAST faster than BLAST?",
         "config": "hybrid_expansion",
-        "recall@10": 0.5,
-        "judge_correctness": 0.0,
-        "note": "Disagreement: recall@10=0.5 but expansion polluted context; model answered about antipsychotics (wrong topic). Judge correctness 0.",
+        "recall@10": 1.0,
+        "judge_correctness": 1.0,
+        "note": "Recall@10=1.0 but the citation validator forced INSUFFICIENT_EVIDENCE; RAGAS precision 0, custom/DeepEval still 1.0.",
     },
     {
-        "query_id": 2731,
-        "question": "What biologic process in the body is associated with Mast cells?",
-        "config": "hybrid_expansion",
-        "recall@10": 0.588,
-        "judge_correctness": 0.0,
-        "note": "Disagreement: solid recall but answer returned INSUFFICIENT_EVIDENCE — retrieved passages not usable for a grounded claim.",
-    },
-    {
-        "query_id": 3383,
-        "question": "AhR ligands are attractive drug targets ... due to their induction of Cyp1a1, yes or no?",
-        "config": "hybrid_expansion",
-        "recall@10": 0.5,
-        "judge_correctness": 0.0,
-        "note": "Citation validity failed (hallucinated IDs) and answer drifted to CYP enzyme generalities; now forced to INSUFFICIENT_EVIDENCE by validator.",
+        "query_id": 85,
+        "question": "Which transcription factor is considered as a master regulator of lysosomal genes?",
+        "config": "hybrid_weighted",
+        "recall@10": 0.6,
+        "judge_correctness": 1.0,
+        "note": "TFEB answer looks right and custom/DeepEval are 1.0, but RAGAS precision is 0 (claim NLI vs a longer gold).",
     },
     {
         "query_id": 4073,
         "question": "The Shingrix vaccine is used to prevent what disease?",
         "config": "hybrid_weighted",
-        "recall@10": 0.182,
+        "recall@10": 0.091,
         "judge_correctness": 1.0,
-        "note": "Opposite disagreement: low recall@10 but judge correctness 1.0 — sparse gold IDs; answer still correct from partial context.",
+        "note": "Low recall, answer INSUFFICIENT_EVIDENCE; RAGAS 0, custom/DeepEval 1.0 — those two often score the sentinel as fully correct.",
+    },
+    {
+        "query_id": 4035,
+        "question": "Which receptor is blocked by Finerenone?",
+        "config": "lexical",
+        "recall@10": 0.0,
+        "judge_correctness": 1.0,
+        "note": "No gold in top-10, INSUFFICIENT_EVIDENCE; expansion recovers a grounded mineralocorticoid-receptor answer (RAGAS 1.0).",
     },
 ]
 
@@ -95,14 +95,35 @@ def main():
         if cfgs["hybrid_expansion"]["ndcg@10"] > cfgs["best"]["ndcg@10"] + 1e-9:
             best = "hybrid_expansion"
 
-    lines = ["# Evaluation report", "",
-             f"Judge: `{summary.get('judge_model')}` temp={summary.get('judge_temperature')} | "
-             f"Embeddings: `{summary.get('embedding_model')}` | VectorDB: `{summary.get('vector_db')}`", "",
-             "## Traditional retrieval metrics", "",
-             "Measured with `relevant_passage_ids`. Latency is retrieval wall time. Cost is LLM token cost.", "",
-             "## Comparison table", "",
-             "| config | recall@5 | recall@10 | mrr@10 | ndcg@10 | latency_ms | p95 | cost_usd/q |",
-             "|---|---|---|---|---|---|---|---|"]
+    jmodel = summary.get("judge_subset", {}).get("judge_model", summary.get("judge_model"))
+    lines = [
+        "# Evaluation report",
+        "",
+        "Same **100 query IDs** for every configuration (seed 42). Gold `relevant_passage_ids` "
+        "used only for scoring. Judge prompt, model, and temperature fixed across runs.",
+        "",
+        "| Step 4 layer | Required | Status |",
+        "|---|---|---|",
+        "| Traditional retrieval metrics | Recall@5, Recall@10, MRR@10, nDCG@10, latency, cost | "
+        "Done — 100 queries, table below |",
+        "| LLM-judge | Correctness, groundedness, context relevance; fixed settings | "
+        f"Done — 20-query subset, `{jmodel}`, frameworks: "
+        f"{', '.join(summary.get('judge_frameworks') or ['custom'])} |",
+        "| Manual review | Disagreements between judge and retrieval; citation validity in code | "
+        "Done — cases below; validator in `backend/app/generation/answer.py` |",
+        "",
+        f"Embeddings `{summary.get('embedding_model')}`. Vector store `{summary.get('vector_db')}`. "
+        f"Judge: `{jmodel}`, temperature `{summary.get('judge_temperature')}`.",
+        "",
+        "## Traditional retrieval metrics",
+        "",
+        "Measured with `relevant_passage_ids`. Latency is retrieval wall time. Cost is LLM token cost (`$0` on Ollama).",
+        "",
+        "## Comparison table",
+        "",
+        "| config | recall@5 | recall@10 | mrr@10 | ndcg@10 | latency_ms | p95 | cost_usd/q |",
+        "|---|---|---|---|---|---|---|---|",
+    ]
     for c in order:
         a = cfgs[c]
         cost = a.get("cost_usd_per_query", a.get("cost_usd", 0.0) / max(a.get("n_queries", 1), 1))
@@ -112,8 +133,62 @@ def main():
             f"| {float(cost):.4f} |"
         )
 
-    judged = {c: cfgs[c] for c in order if cfgs[c].get("n_judged")}
-    if judged:
+    if "hybrid_expansion" in cfgs and "best" in cfgs:
+        lines.append("")
+        lines.append("`best` is the strongest variant: weighted hybrid + query expansion.")
+
+    judged = {c: cfgs[c] for c in order if cfgs[c].get("n_judged") or cfgs[c].get("judges")}
+    fws = list(summary.get("judge_frameworks") or [])
+    if not fws:
+        for c in order:
+            fws.extend(k for k in (cfgs[c].get("judges") or {}) if k not in fws)
+    if judged and fws:
+        n_j = next((cfgs[c].get("n_judged") for c in order if cfgs[c].get("judges")), "?")
+        lines += [
+            "",
+            "## LLM-judge evaluation",
+            "",
+            f"Frameworks from `JUDGE_FRAMEWORK`: {', '.join(fws)}. "
+            f"Prompt/model/temperature fixed (`{jmodel}`, temp={summary.get('judge_temperature')}). "
+            f"Subset size {n_j}. The 20-query judge does **not** select the winner — "
+            "that is 100-query nDCG@10 then Recall@10.",
+            "",
+            "| Framework | Package | Correctness | Groundedness | Context relevance |",
+            "|---|---|---|---|---|",
+            "| custom | built-in JSON judge | JSON `correctness` | JSON `groundedness` | JSON `context_relevance` |",
+            "| ragas | RAGAS 0.4.3 | `FactualCorrectness` (`mode=precision`) | `Faithfulness` | `ContextRelevance` |",
+            "| deepeval | DeepEval 4.2.3 | `AnswerRelevancyMetric` | `FaithfulnessMetric` | `ContextualRelevancyMetric` |",
+            "",
+            "RAGAS precision scores whether **answer claims** are supported by the gold. "
+            "It is 0 for `INSUFFICIENT_EVIDENCE` and when claim-NLI finds no overlap. "
+            "Custom and DeepEval often score that sentinel as 1.0.",
+            "",
+            "| config | cites valid | insufficient | n_judged |",
+            "|---|---|---|---|",
+        ]
+        for c in order:
+            a = cfgs[c]
+            if not a.get("judges"):
+                continue
+            lines.append(
+                f"| {c} | {a.get('citation_valid_rate', 0):.3f} | "
+                f"{a.get('insufficient_rate', 0):.3f} | {int(a.get('n_judged', n_j or 0))} |"
+            )
+        lines.append("")
+        for fw in fws:
+            lines += [f"### {fw}", "",
+                      "| config | correctness | groundedness | context_rel | n |",
+                      "|---|---|---|---|---|"]
+            for c in order:
+                block = (cfgs[c].get("judges") or {}).get(fw)
+                if not block:
+                    continue
+                lines.append(
+                    f"| {c} | {block['correctness']:.3f} | {block['groundedness']:.3f} "
+                    f"| {block['context_relevance']:.3f} | {int(block.get('n', n_j or 0))} |"
+                )
+            lines.append("")
+    elif judged:
         n_j = next(iter(judged.values())).get("n_judged", "?")
         jmodel = summary.get("judge_subset", {}).get("judge_model", summary.get("judge_model"))
         lines += ["", "## LLM-judge evaluation", "",
@@ -128,12 +203,6 @@ def main():
             lines.append(f"| {c} | {a['judge_correctness']:.3f} | {a['judge_groundedness']:.3f} "
                          f"| {a['judge_context_relevance']:.3f} | {a['citation_valid_rate']:.3f} "
                          f"| {a['insufficient_rate']:.3f} | {int(a['n_judged'])} |")
-        lines += ["",
-                  "Note: retrieval rank metrics favour `hybrid_expansion`, but the LLM judge "
-                  "(answer correctness vs BioASQ gold answer, groundedness vs context, context relevance) "
-                  "prefers `hybrid_weighted` — expansion adds recall at the cost of answer precision "
-                  "and ~20 s/query local latency. Local Ollama cost is $0; OpenRouter runs accrue "
-                  "`cost_usd` from tracked token usage.", ""]
 
     b = cfgs.get(best, {})
     lines += ["", f"## Winner: `{best}`",

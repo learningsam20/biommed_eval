@@ -17,7 +17,9 @@ class Settings(BaseSettings):
     OPENROUTER_MODEL: str = "anthropic/claude-3.5-sonnet"
     OPENROUTER_BASE_URL: str = "https://openrouter.ai/api/v1"
     OLLAMA_BASE_URL: str = "http://localhost:11434"
-    OLLAMA_MODEL: str = "llama3.1:8b"
+    OLLAMA_MODEL: str = "granite4.1:3b"
+    OLLAMA_NUM_CTX: int = 32768
+    OLLAMA_NUM_PREDICT: int = 1500
     LLM_TEMPERATURE_EXPANSION: float = 0.3
     LLM_TEMPERATURE_ANSWER: float = 0.1
 
@@ -58,6 +60,8 @@ class Settings(BaseSettings):
     EVAL_OUTPUT_DIR: str = "results"
     JUDGE_MODEL: str = "same_as_llm"
     JUDGE_TEMPERATURE: float = 0.0
+    # custom | ragas | deepeval | all  (comma-separated lists also work)
+    JUDGE_FRAMEWORK: str = "all"
 
     BACKEND_HOST: str = "0.0.0.0"
     BACKEND_PORT: int = 5268

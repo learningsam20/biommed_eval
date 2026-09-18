@@ -60,4 +60,4 @@ Required configs on the **same 100 query IDs**: lexical, dense, hybrid, hybrid +
 
 Selection uses the comparison table (Recall, MRR, nDCG, latency, cost). **`hybrid_expansion` won** on nDCG@10 (0.632) and Recall@10 (0.518). Trade-off: ~27 s/query vs ~80 ms without expansion.
 
-LLM-judge (correctness, groundedness, context relevance) is the second scoring layer, with prompt/model/temperature fixed. It was run on a 20-query subset for cost (`results_judge20/` is a local working directory). Those scores are in the report for disagreement review; they do not replace the 100-query table as the basis for the selected config.
+LLM-judge (correctness, groundedness, context relevance) is the second scoring layer, with prompt/model/temperature fixed. It was run on a 20-query subset for cost (`results/judge/`). Those scores are in the report for disagreement review; they do not replace the 100-query table as the basis for the selected config.

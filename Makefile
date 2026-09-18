@@ -1,5 +1,5 @@
 # Makefile — BioMed Hybrid Search (Pinecone-first)
-.PHONY: help install backend-install frontend-install dev backend-dev frontend-dev restart build test eval-setup eval-run eval-report index clean
+.PHONY: help install backend-install frontend-install dev backend-dev frontend-dev restart build test eval-setup eval-run eval-judge eval-report index clean
 
 help:
 	@echo "Setup:"; echo "  make install          - backend + frontend deps"
@@ -8,7 +8,8 @@ help:
 	@echo "  make restart          - kill those ports and start both (scripts/restart.sh)"
 	@echo "Indexing:"; echo "  make index            - build BM25 + Pinecone index"
 	@echo "Evaluation:"; echo "  make eval-setup       - frozen 100-query set"
-	@echo "  make eval-run         - run all configs"; echo "  make eval-report      - markdown report + best config"
+	@echo "  make eval-run         - run all configs"; echo "  make eval-judge       - LLM-judge (JUDGE_FRAMEWORK in .env)"
+	@echo "  make eval-report      - markdown report + best config + README findings"
 	@echo "Maintenance:"; echo "  make test | make clean"
 
 install: backend-install frontend-install
@@ -40,6 +41,9 @@ eval-setup:
 
 eval-run:
 	cd backend && python -m scripts.run_evaluation --config all --eval-set data/eval_queries_100.json --output results
+
+eval-judge:
+	cd backend && python -m scripts.run_evaluation --config lexical,hybrid_weighted,hybrid_expansion --judge --limit 20 --eval-set data/eval_queries_100.json --output results
 
 eval-report:
 	cd backend && python -m scripts.generate_report --results-dir results --output docs/evaluation_report.md
