@@ -53,6 +53,7 @@ def _safe_score(metric) -> float:
 
 
 def _model(llm_client, temperature: float):
+    """OllamaModel with think off, or a thin wrapper around the app OpenRouter client."""
     import os
 
     from app.config import get_settings
@@ -113,6 +114,7 @@ def _measure(metric, case) -> None:
 
 def score_deepeval_one(question: str, reference: str, answer: str,
                        contexts: List[str], llm_client, temperature: float = 0.0) -> Dict[str, float]:
+    """DeepEval RAG triad: AnswerRelevancy, Faithfulness, ContextualRelevancy → our keys."""
     from deepeval.metrics import (
         AnswerRelevancyMetric,
         ContextualRelevancyMetric,

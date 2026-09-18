@@ -30,6 +30,7 @@ class PineconeVectorStore:
         self._index = None
 
     def create_index_if_not_exists(self) -> None:
+        """Create the serverless index, or fail if an existing one has the wrong dim."""
         existing = [i.name for i in self.client.list_indexes()]
         if self.index_name not in existing:
             self.client.create_index(
@@ -61,6 +62,7 @@ class PineconeVectorStore:
             self._index.upsert(vectors=batch, namespace=self.namespace or None)
 
     def search(self, vector, top_k) -> List[Tuple[str, float]]:
+        """Nearest neighbors: ``(vector_id, cosine_score)``."""
         if self._index is None:
             self.create_index_if_not_exists()
         res = self._index.query(vector=vector, top_k=top_k,
@@ -68,6 +70,7 @@ class PineconeVectorStore:
         return [(m.id, float(m.score)) for m in res.matches]
 
     def fetch_texts(self, ids: List[str]) -> dict:
+        """Map passage ID → stored text snippet for the evidence panel."""
         if self._index is None:
             self.create_index_if_not_exists()
         try:
@@ -98,6 +101,7 @@ class QdrantVectorStore:
         self.dimension = dimension
 
     def create_index_if_not_exists(self) -> None:
+        """Create a cosine collection if it is missing."""
         from qdrant_client.models import Distance, VectorParams
         try:
             self.client.get_collection(self.collection)
@@ -121,6 +125,7 @@ class QdrantVectorStore:
         return [(str(h.payload.get("pid", h.id)), float(h.score)) for h in hits]
 
     def fetch_texts(self, ids: List[str]) -> dict:
+        """Scroll by payload ``pid`` and return id → text."""
         from qdrant_client.models import FieldCondition, Filter, MatchAny
         try:
             records, _ = self.client.scroll(
@@ -141,6 +146,7 @@ class QdrantVectorStore:
 
 
 def get_vector_store(settings) -> VectorStore:
+    """Pinecone or Qdrant from ``VECTOR_DB``. Same interface for index, search, fetch."""
     if settings.VECTOR_DB.lower() == "pinecone":
         if not settings.PINECONE_API_KEY:
             raise RuntimeError("VECTOR_DB=pinecone but PINECONE_API_KEY is empty in .env")

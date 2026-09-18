@@ -71,6 +71,10 @@ FAILURE_CASES = [
 
 
 def main():
+    """Write ``docs/evaluation_report.md`` and ``docs/best_hybrid_config.json`` from summary.json.
+
+    Winner = max nDCG@10, then Recall@10. Judge tables are a second layer, not the selector.
+    """
     ap = argparse.ArgumentParser()
     ap.add_argument("--results-dir", default="results/")
     ap.add_argument("--output", default="docs/evaluation_report.md")
@@ -84,6 +88,7 @@ def main():
 
     # Align `best` label with strongest nDCG variant when metrics are identical to a peer
     def pick_best():
+        """Select the config with highest nDCG@10, breaking ties on Recall@10."""
         return max(order, key=lambda c: (cfgs[c]["ndcg@10"], cfgs[c]["recall@10"]))
 
     best = pick_best() if order else "-"

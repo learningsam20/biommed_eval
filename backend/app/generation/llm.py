@@ -18,12 +18,14 @@ class UsageAccumulator:
     cost_usd: float = 0.0
 
     def add(self, prompt: int, completion: int, cost: float = 0.0) -> None:
+        """Accumulate one LLM call's tokens and estimated USD."""
         self.prompt_tokens += max(0, prompt)
         self.completion_tokens += max(0, completion)
         self.calls += 1
         self.cost_usd += max(0.0, cost)
 
     def snapshot(self) -> dict:
+        """JSON-serializable usage for ``results/summary.json`` cost columns."""
         return {
             "prompt_tokens": self.prompt_tokens,
             "completion_tokens": self.completion_tokens,
@@ -49,6 +51,7 @@ class LLMClient(Protocol):
 
 
 class OpenRouterClient:
+    """Hosted OpenAI-compatible chat. Cost is a ballpark from token counts."""
     def __init__(self, api_key: str, model: str, base_url: str,
                  usage: Optional[UsageAccumulator] = None):
         from openai import OpenAI
@@ -58,6 +61,7 @@ class OpenRouterClient:
         self.usage = usage or UsageAccumulator()
 
     def chat(self, system: str, user: str, temperature: float = 0.1) -> str:
+        """One completion; records usage even if the API omits a usage object."""
         resp = self.client.chat.completions.create(
             model=self.model, temperature=temperature,
             messages=[{"role": "system", "content": system},
@@ -76,6 +80,7 @@ class OpenRouterClient:
 
 
 class OllamaClient:
+    """Local chat via the Ollama SDK. Tokens are counted; cost is always $0."""
     def __init__(self, base_url: str, model: str, num_ctx: int = 16384,
                  num_predict: int = 1500, usage: Optional[UsageAccumulator] = None):
         import ollama
@@ -86,6 +91,7 @@ class OllamaClient:
         self.usage = usage or UsageAccumulator()
 
     def chat(self, system: str, user: str, temperature: float = 0.1) -> str:
+        """Chat with ``think=False`` and ``num_predict`` from settings (timeout 20s)."""
         try:
             resp = self.client.chat(
                 model=self.model,
@@ -118,6 +124,7 @@ class OllamaClient:
 
 
 def get_llm_client(settings) -> LLMClient:
+    """Factory: ``LLM_PROVIDER=ollama`` or OpenRouter. Shared by search, expansion, judge."""
     usage = UsageAccumulator()
     if settings.LLM_PROVIDER.lower() == "ollama":
         return OllamaClient(settings.OLLAMA_BASE_URL, settings.OLLAMA_MODEL,

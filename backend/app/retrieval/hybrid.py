@@ -13,6 +13,10 @@ def dedupe_by_best_score(pairs: List[Tuple[int, float]]) -> List[Tuple[int, floa
 
 def reciprocal_rank_fusion(rank_lists: List[List[Tuple[int, float]]], k: int = 60,
                            top_k: int = 20) -> List[Tuple[int, float]]:
+    """Combine ranked lists by rank, not raw score: score += 1 / (k + rank).
+
+    Each list votes once per passage ID. Default k=60 (Cormack et al.).
+    """
     scores: Dict[int, float] = {}
     for rlist in rank_lists:
         # Deduplicate within each list so one signal cannot vote twice for the same id
@@ -28,6 +32,7 @@ def reciprocal_rank_fusion(rank_lists: List[List[Tuple[int, float]]], k: int = 6
 
 
 def _minmax_norm(pairs: List[Tuple[int, float]]) -> Dict[int, float]:
+    """Scale scores in a list to [0, 1] so BM25 and cosine can be added."""
     if not pairs:
         return {}
     vals = [s for _, s in pairs]
@@ -40,6 +45,7 @@ def _minmax_norm(pairs: List[Tuple[int, float]]) -> Dict[int, float]:
 def weighted_fusion(lexical: List[Tuple[int, float]], dense: List[Tuple[int, float]],
                     w_bm25: float = 0.5, w_dense: float = 0.5,
                     top_k: int = 20) -> List[Tuple[int, float]]:
+    """Min-max-normalize each signal, then ``w_bm25 * lex + w_dense * dense``."""
     ln, dn = _minmax_norm(lexical), _minmax_norm(dense)
     fused: Dict[int, float] = {}
     for pid, v in ln.items():

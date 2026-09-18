@@ -24,7 +24,12 @@ def _pubmed_url(pid: int) -> str:
 
 
 def _retrieve(req: SearchRequest, settings: Settings) -> Tuple[List[Tuple[int, float]], List[str], str]:
-    """Shared retrieval path used by /search and /answer. Returns (ranked, expansions, signal)."""
+    """Shared retrieval used by ``/search`` and ``/answer``.
+
+    Flow: optional expansion → BM25 and/or dense in parallel → fusion or
+    single-signal sort → top_k. Returns ``(ranked_pairs, expansions, signal_name)``.
+    Gold passage IDs are never used here.
+    """
     from app.retrieval.hybrid import dedupe_by_best_score, reciprocal_rank_fusion, weighted_fusion
 
     bm25 = _state.get("bm25")
@@ -83,6 +88,7 @@ def _retrieve(req: SearchRequest, settings: Settings) -> Tuple[List[Tuple[int, f
 
 @router.post("/search", response_model=SearchResponse)
 async def search(req: SearchRequest, settings: Settings = Depends(get_settings)):
+    """Retrieve ranked evidence. Does not call the answer LLM."""
     t0 = time.perf_counter()
     ranked, expansions, signal = _retrieve(req, settings)
     store = _state.get("store")
@@ -104,6 +110,7 @@ async def search(req: SearchRequest, settings: Settings = Depends(get_settings))
 
 @router.post("/expand", response_model=ExpandResponse)
 async def expand(req: ExpandRequest, settings: Settings = Depends(get_settings)):
+    """LLM alternate queries only. Original is omitted from ``expansions`` (UI already has it)."""
     llm = _state.get("llm")
     if llm is None:
         return ExpandResponse(original_query=req.query, expansions=[])
@@ -131,6 +138,7 @@ async def generate(req: GenerateRequest, settings: Settings = Depends(get_settin
 
 @router.post("/answer", response_model=AnswerResponse)
 async def answer(req: AnswerRequest, settings: Settings = Depends(get_settings)):
+    """One-shot: retrieve then generate a grounded answer with citation checks."""
     t0 = time.perf_counter()
     sr = await search(SearchRequest(query=req.query, mode=req.mode, fusion=req.fusion,
                                     top_k=req.top_k, use_expansion=req.use_expansion), settings)

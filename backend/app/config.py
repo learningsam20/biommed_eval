@@ -12,6 +12,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
+    """All runtime switches. Values come from `.env` (see `.env.example`)."""
     LLM_PROVIDER: str = "openrouter"
     OPENROUTER_API_KEY: Optional[str] = None
     OPENROUTER_MODEL: str = "anthropic/claude-3.5-sonnet"
@@ -79,6 +80,7 @@ class Settings(BaseSettings):
 
 
 def resolve_path(path: str) -> Path:
+    """Repo-relative paths from `.env` (eval set, BM25 pickle, results dir)."""
     p = Path(path)
     return p if p.is_absolute() else (REPO_ROOT / p)
 
@@ -116,4 +118,5 @@ def _swap_loopback(url: str) -> str:
 
 @lru_cache()
 def get_settings() -> Settings:
+    """Load `.env` once. Change a switch → restart the process."""
     return Settings()

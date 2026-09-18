@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 
 def load_corpus(dataset_id: str, limit: int = 0):
+    """Load HF ``text-corpus/passages`` into parallel id and text lists."""
     from datasets import load_dataset
     ds = load_dataset(dataset_id, "text-corpus")["passages"]
     ids, texts = [], []
@@ -20,6 +21,7 @@ def load_corpus(dataset_id: str, limit: int = 0):
 
 
 def main():
+    """Write BM25 pickle, passages.jsonl, and (unless ``--skip-dense``) upsert vectors."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--skip-dense", action="store_true", help="build BM25 only")

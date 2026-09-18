@@ -21,6 +21,7 @@ LLM_CALL_TIMEOUT_S = 20
 
 
 def parse_judge_frameworks(value: str | None) -> List[str]:
+    """Parse ``JUDGE_FRAMEWORK``: ``custom``, ``ragas``, ``deepeval``, ``all``, or a CSV list."""
     raw = (value or "custom").strip().lower()
     if raw in ("all", "*"):
         return list(VALID_FRAMEWORKS)
@@ -39,6 +40,7 @@ def parse_judge_frameworks(value: str | None) -> List[str]:
 
 def judge_prompt(question: str, reference: str, answer: str,
                  evidence: List[Tuple[int, str]]) -> str:
+    """Fixed custom-judge user prompt. Same text for every retrieval config."""
     ctx = "\n".join(f"[{pid}] {t[:JUDGE_CONTEXT_CHARS]}" for pid, t in evidence[:10])
     return (f"Question: {question}\nReference: {reference[:1500]}\n"
             f"Candidate: {answer[:2000]}\nContext:\n{ctx}\nScore correctness, "
@@ -47,6 +49,7 @@ def judge_prompt(question: str, reference: str, answer: str,
 
 @dataclass
 class JudgeScores:
+    """0–1 triad stored on each judged row. ``as_row`` is the JSON shape."""
     correctness: float
     groundedness: float
     context_relevance: float
@@ -63,6 +66,7 @@ class JudgeScores:
 def run_custom_judge(question: str, reference: str, answer: str,
                      evidence: List[Tuple[int, str]], llm_client,
                      temperature: float = 0.0) -> JudgeScores:
+    """One JSON LLM call. Parse failure → all zeros (does not abort the eval)."""
     import json
     try:
         raw = llm_client.chat(system=JUDGE_SYSTEM,
@@ -106,7 +110,11 @@ def score_with_frameworks(
     temperature: float = 0.0,
     deadline: float | None = None,
 ) -> Dict[str, Dict[str, float]]:
-    """Run each selected framework on one (question, answer, context) triple."""
+    """Run each selected framework on one (question, answer, context) triple.
+
+    Remaining frameworks are skipped (scored 0) if fewer than 8s remain before
+    ``deadline`` (monotonic clock). Errors inside a framework also become zeros.
+    """
     import time
     zeros = {"correctness": 0.0, "groundedness": 0.0, "context_relevance": 0.0}
     out: Dict[str, Dict[str, float]] = {}

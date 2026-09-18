@@ -5,6 +5,7 @@ from typing import Callable, Dict, List
 
 def run_config(queries: List[dict], retrieve_fn: Callable,
                judge_fn=None) -> List[Dict]:
+    """Score every frozen query with `retrieve_fn`; optionally attach `judge_fn` output."""
     from .metrics import score_query
     rows = []
     for q in queries:

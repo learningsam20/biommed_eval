@@ -68,7 +68,7 @@ flowchart TB
     ONLINE --> UI
 ```
 
-Full diagram: **[docs/architecture.md](docs/architecture.md)**.
+Full diagram: **[docs/architecture.md](docs/architecture.md)**. Code flow and metric formulas: **[docs/code-understanding.md](docs/code-understanding.md)**.
 
 ### Main choices
 
@@ -148,6 +148,7 @@ docs/                requirements, architecture, evaluation report, best config
 |---|---|
 | [docs/requirement.md](docs/requirement.md) | Product requirements |
 | [docs/architecture.md](docs/architecture.md) | System diagram |
+| [docs/code-understanding.md](docs/code-understanding.md) | Code flow and how metrics are calculated |
 | [docs/evaluation_report.md](docs/evaluation_report.md) | Comparison table, winner, examples |
 | [docs/best_hybrid_config.json](docs/best_hybrid_config.json) | Selected retrieval recipe |
 | [backend/scripts/run_evaluation.py](backend/scripts/run_evaluation.py) | Reproducible 100-query runner |

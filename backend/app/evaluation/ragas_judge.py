@@ -34,6 +34,7 @@ def _score_value(result: Any) -> float:
 
 
 def _ragas_llm(temperature: float = 0.0):
+    """Cached InstructorLLM / llm_factory client. Reused so httpx keeps one event loop."""
     global _LLM, _LLM_KEY
     import instructor
     from openai import AsyncOpenAI
@@ -100,6 +101,11 @@ async def _score_named(name: str, metric, **kwargs) -> float:
 
 def score_ragas_one(question: str, reference: str, answer: str,
                     contexts: List[str], llm_client, temperature: float = 0.0) -> Dict[str, float]:
+    """RAGAS triad mapped to our keys: correctness / groundedness / context_relevance.
+
+    FactualCorrectness uses ``mode=precision`` (answer claims supported by gold).
+    Faithfulness and ContextRelevance use retrieved passages, not the gold IDs.
+    """
     from ragas.metrics.collections import ContextRelevance, FactualCorrectness, Faithfulness
 
     del llm_client  # RAGAS talks to the provider directly

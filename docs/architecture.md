@@ -44,6 +44,8 @@ flowchart TB
 
 The experiment runner (`backend/scripts/run_evaluation.py`) reuses the online retrieve path. Every search records passage IDs and scores. Offline indexes are built once and shared by the UI and the 100-query runs.
 
+How those pieces call each other, and how Recall / MRR / nDCG / judges are computed: **[code-understanding.md](code-understanding.md)**.
+
 ## Main choices
 
 | Choice | What we use | Why |

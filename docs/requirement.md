@@ -105,5 +105,6 @@ Document the main choices: vector database, embedding model, fusion method, fina
 | Evaluation runner | `backend/scripts/run_evaluation.py` |
 | Scoring (metrics, judge, citations) | `backend/app/evaluation/`, `backend/app/generation/answer.py` |
 | Report | `docs/evaluation_report.md` |
+| How the code and metrics work | `docs/code-understanding.md` |
 | Best hybrid config | `docs/best_hybrid_config.json` |
 | System diagram | `docs/architecture.md` |

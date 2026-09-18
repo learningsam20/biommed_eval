@@ -23,6 +23,11 @@ def _dedupe(pairs):
 
 
 def make_retrieve_fn(config: str, ctx: dict):
+    """Build a ``question -> [(id, score), ...]`` function for one eval config.
+
+    Same retrieve path as the API: expansion (hybrid_expansion/best only),
+    BM25 + dense in parallel, then weighted fusion, RRF, or a single signal.
+    """
     from app.retrieval.hybrid import reciprocal_rank_fusion, weighted_fusion
     from app.retrieval.expansion import expand_query
     s, bm25, dense, llm = ctx["settings"], ctx["bm25"], ctx["dense"], ctx["llm"]
@@ -75,6 +80,7 @@ def make_retrieve_fn(config: str, ctx: dict):
 
 
 def main():
+    """Run selected configs over the frozen eval set; optionally merge a 20-query judge."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--config", default="all")
     ap.add_argument("--eval-set", default="data/eval_queries_100.json")
@@ -153,6 +159,7 @@ def main():
         print(f"judge frameworks: {', '.join(frameworks)}")
 
     def judge_query(q, retrieved_ids):
+        """Generate an answer from top passages, then score it with every selected judge."""
         from app.evaluation.judge import (
             JUDGE_CONTEXT_PASSAGES,
             JUDGE_QUERY_TIMEOUT_S,

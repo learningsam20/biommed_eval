@@ -10,6 +10,7 @@ logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
+    """Load LLM, vector store, BM25 pickle, and dense retriever into search._state."""
     settings = get_settings()
     logging.basicConfig(level=settings.LOG_LEVEL)
     logger.info("starting biomed-hybrid-search provider=%s vectordb=%s embed=%s",
@@ -42,6 +43,7 @@ async def lifespan(app: FastAPI):
 
 
 def create_app() -> FastAPI:
+    """Wire CORS, ``/api/config``, health, and search routers."""
     settings = get_settings()
     app = FastAPI(title="BioMed Hybrid Search API", version="1.0.0", lifespan=lifespan)
     origins = cors_origins(settings.FRONTEND_URL)

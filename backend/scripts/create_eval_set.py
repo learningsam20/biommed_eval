@@ -20,6 +20,7 @@ PATTERNS = [
 
 
 def classify(q: str) -> str:
+    """Bucket a question into yesno / definition / list / treatment / mechanism / effect / other."""
     for label, rx in PATTERNS:
         if rx.search(q):
             return label
@@ -27,6 +28,7 @@ def classify(q: str) -> str:
 
 
 def main():
+    """Stratified sample of 100 queries (seed 42). Gold IDs are stored for scoring only."""
     ap = argparse.ArgumentParser()
     ap.add_argument("--output", default="data/eval_queries_100.json")
     ap.add_argument("--seed", type=int, default=42)
