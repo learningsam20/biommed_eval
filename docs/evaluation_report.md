@@ -71,13 +71,16 @@ RAGAS precision scores whether **answer claims** are supported by the gold. It i
 
 
 ## Winner: `hybrid_expansion`
-Selected by max nDCG@10 then Recall@10 (ndcg=0.632, recall@10=0.518, latency=26930.4 ms).
-Trade-off: hybrid+expansion gains recall at +1 LLM call latency (and token cost on hosted providers). For interactive UI we default expansion **off** and use weighted fusion (~80 ms retrieval); enable expansion when maximising recall offline.
-Code alias: `best` = weighted fusion + query expansion (same recipe as `hybrid_expansion`).
+
+**What won.** `hybrid_expansion` (weighted hybrid + query expansion; code alias `best`).
+
+**Why.** Highest **nDCG@10** then **Recall@10** on the same 100 query IDs (nDCG@10=0.632, Recall@10=0.518, MRR@10=0.826). Hybrid already beats lexical or dense alone; keeping the original query and adding LLM expansions lifts recall further. The 20-query LLM-judge is a second layer for disagreement review — it does not select the config.
+
+**Trade-off (latency / cost).** Mean retrieve latency is **26.9 s/query** versus **~82 ms** for weighted hybrid without expansion (one extra LLM round-trip). Cost on this Ollama run is **$0.0000/query**; a hosted LLM would bill that expansion call as `cost_usd`. Interactive UI therefore defaults expansion **off** and weighted fusion; turn expansion on when maximising recall offline.
 
 ## Manual review
 
-Cases where the judge and retrieval metrics disagree. Citation validity is checked in code.
+A few successful searches and a few failure / disagreement cases. Citation validity is checked in code, not by the LLM.
 
 ## Success cases
 

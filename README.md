@@ -128,7 +128,7 @@ Same 100 query IDs for every config.
 | Hybrid weighted | 0.607 | 0.495 | 82 ms |
 | **Hybrid + expansion** | **0.632** | **0.518** | ~27 s |
 
-Expansion is the best **ranker**. On the 20-query LLM-judge (`granite4.1:3b`, temperature 0.0) custom and DeepEval correctness sit at ~0.95–1.0 for lexical, weighted, and expansion — they often score `INSUFFICIENT_EVIDENCE` as 1.0. RAGAS FactualCorrectness (**precision**) is ~0.44–0.48; zeros are uncovered gold claims, insufficient answers, or failed claim-NLI. The judge does **not** pick the winner. Extra recall still costs one LLM round-trip. Local Ollama is $0; hosted models accrue `cost_usd`.
+Expansion is the best **ranker** (highest nDCG@10 then Recall@10). Trade-off: ~27 s/query vs ~82 ms without expansion (one extra LLM call; **$0** on this Ollama run). The UI therefore defaults expansion off. Examples of successful searches and failures are in the evaluation report. On the 20-query LLM-judge (`granite4.1:3b`, temperature 0.0) custom and DeepEval correctness sit at ~0.95–1.0 — they often score `INSUFFICIENT_EVIDENCE` as 1.0. RAGAS FactualCorrectness (**precision**) is ~0.44–0.48. The judge does **not** pick the winner.
 
 Full table, judge scores, and examples: **[docs/evaluation_report.md](docs/evaluation_report.md)**. Chosen recipe: **[docs/best_hybrid_config.json](docs/best_hybrid_config.json)**. Runner: **[backend/scripts/run_evaluation.py](backend/scripts/run_evaluation.py)**.
 

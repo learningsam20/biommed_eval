@@ -210,17 +210,36 @@ def main():
                          f"| {a['insufficient_rate']:.3f} | {int(a['n_judged'])} |")
 
     b = cfgs.get(best, {})
-    lines += ["", f"## Winner: `{best}`",
-              f"Selected by max nDCG@10 then Recall@10 (ndcg={b.get('ndcg@10', 0):.3f}, "
-              f"recall@10={b.get('recall@10', 0):.3f}, latency={b.get('latency_ms', 0):.1f} ms).",
-              "Trade-off: hybrid+expansion gains recall at +1 LLM call latency (and token cost on "
-              "hosted providers). For interactive UI we default expansion **off** and use weighted "
-              "fusion (~80 ms retrieval); enable expansion when maximising recall offline.",
-              "Code alias: `best` = weighted fusion + query expansion (same recipe as "
-              "`hybrid_expansion`).",
-              "", "## Manual review", "",
-              "Cases where the judge and retrieval metrics disagree. Citation validity is checked in code.",
-              "", "## Success cases", ""]
+    w_lat = b.get("latency_ms", 0) or 0
+    w_cost = b.get("cost_usd_per_query", 0.0) or 0.0
+    weighted = cfgs.get("hybrid_weighted", {})
+    w_ms = weighted.get("latency_ms", 80) or 80
+    lines += [
+        "",
+        f"## Winner: `{best}`",
+        "",
+        f"**What won.** `{best}` (weighted hybrid + query expansion; code alias `best`).",
+        "",
+        "**Why.** Highest **nDCG@10** then **Recall@10** on the same 100 query IDs "
+        f"(nDCG@10={b.get('ndcg@10', 0):.3f}, Recall@10={b.get('recall@10', 0):.3f}, "
+        f"MRR@10={b.get('mrr@10', 0):.3f}). Hybrid already beats lexical or dense alone; "
+        "keeping the original query and adding LLM expansions lifts recall further. "
+        "The 20-query LLM-judge is a second layer for disagreement review — it does not select the config.",
+        "",
+        f"**Trade-off (latency / cost).** Mean retrieve latency is **{w_lat/1000:.1f} s/query** "
+        f"versus **~{w_ms:.0f} ms** for weighted hybrid without expansion (one extra LLM round-trip). "
+        f"Cost on this Ollama run is **${w_cost:.4f}/query**; a hosted LLM would bill that expansion "
+        "call as `cost_usd`. Interactive UI therefore defaults expansion **off** and weighted fusion; "
+        "turn expansion on when maximising recall offline.",
+        "",
+        "## Manual review",
+        "",
+        "A few successful searches and a few failure / disagreement cases. "
+        "Citation validity is checked in code, not by the LLM.",
+        "",
+        "## Success cases",
+        "",
+    ]
     for s in SUCCESS_CASES:
         lines.append(
             f"- **Q{s['query_id']}** (`{s['config']}`, recall@10={s['recall@10']}, "
@@ -248,12 +267,14 @@ def main():
         "weight_bm25": 0.5,
         "weight_dense": 0.5,
         "why": (
-            "Won the 100-query comparison table: highest nDCG@10 and Recall@10 among "
-            "lexical, dense, hybrid, and hybrid+expansion."
+            "Won the 100-query comparison table: highest nDCG@10 then Recall@10 among "
+            "lexical, dense, hybrid, and hybrid+expansion. Hybrid beats a single signal; "
+            "expansion (original query kept) adds recall."
         ),
         "tradeoff": (
-            "One extra LLM round-trip for expansion versus ~80ms for weighted hybrid "
-            "without expansion. UI defaults expansion off."
+            "Mean retrieve latency ~27s/query vs ~80ms for weighted hybrid without expansion "
+            "(one extra LLM round-trip). Cost $0 on Ollama; hosted models bill that call. "
+            "UI defaults expansion off."
         ),
         "metrics": {
             "recall@5": b.get("recall@5"),

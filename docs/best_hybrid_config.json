@@ -6,8 +6,8 @@
   "query_expansion": true,
   "weight_bm25": 0.5,
   "weight_dense": 0.5,
-  "why": "Won the 100-query comparison table: highest nDCG@10 and Recall@10 among lexical, dense, hybrid, and hybrid+expansion.",
-  "tradeoff": "One extra LLM round-trip for expansion versus ~80ms for weighted hybrid without expansion. UI defaults expansion off.",
+  "why": "Won the 100-query comparison table: highest nDCG@10 then Recall@10 among lexical, dense, hybrid, and hybrid+expansion. Hybrid beats a single signal; expansion (original query kept) adds recall.",
+  "tradeoff": "Mean retrieve latency ~27s/query vs ~80ms for weighted hybrid without expansion (one extra LLM round-trip). Cost $0 on Ollama; hosted models bill that call. UI defaults expansion off.",
   "metrics": {
     "recall@5": 0.4245878610553533,
     "recall@10": 0.5176833205064629,
